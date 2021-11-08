@@ -126,7 +126,9 @@ public class Main {
                 Console.printout(ctx.error().toString(), MessageType.ERROR);
             });
         });
-
+        app.get("/login", ctx -> {
+            ctx.render("/public/login.html");
+        });
         app.get("/home", ctx -> {
             ctx.render("/public/home.html");
         });
