@@ -2,6 +2,7 @@ package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
 import de.bytephil.utils.Console;
+import de.bytephil.utils.Login;
 import de.bytephil.utils.ServerConfiguration;
 import io.javalin.Javalin;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -62,34 +63,22 @@ public class Main {
        // thread = UpdateThread.thread;
         // thread.start();
 
-        app.ws("/websockets", ws -> {
+        app.ws("/checklogin", ws -> {
             ws.onConnect(ctx -> {
                 Console.printout("[/websockets] Client connected with Session-ID: " + ctx.getSessionId() + " IP: " + ctx.session.getRemoteAddress(), MessageType.DEBUG);
                 clients.add(ctx.getSessionId());
-               /* if (!thread.isAlive()) {
-                    thread.stop();
-                    thread.start();
-                }
-                //TODO Fixing strange Error
-                */
             });
             ws.onClose(ctx -> {
                 Console.printout("[/websockets] Client disconnected (Session-ID: " + ctx.getSessionId() + ")", MessageType.DEBUG);
                 clients.remove(ctx.getSessionId());
-                /*if (clients.size() == 0 && thread.isAlive()) {
-                    thread.stop();
-                }
-                 */
             });
             ws.onMessage(ctx -> {
                 String message = ctx.message();
 
-                if (message.contains("PASSWORD")) {
-                    message = message.replace("PASSWORD: ", "");
-                    if (message.equalsIgnoreCase(password)) {
-                        ctx.send("CORRECT " + ctx.getSessionId());
-                        logtIn.add(ctx.getSessionId());
-                        Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId(), MessageType.INFO);
+                if (message.contains("LOGIN")) {
+                    message = message.replace("LOGIN: ", "");
+                    if (Login.login(message)) {
+                        ctx.send("CORRECT");
                     } else {
                         ctx.send("WRONG");
                     }
