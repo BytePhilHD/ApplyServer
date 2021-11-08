@@ -2,6 +2,9 @@ package de.bytephil.utils;
 
 public class Login {
 
+    private static String emailRoot = "root@root.com";
+    private static String password = "1234";
+
     /*
         String filename = "phitho|*|Collins234!";     // full file name
         int iend = filename.indexOf("|*|"); //this finds the first occurrence of "."
@@ -26,9 +29,10 @@ public class Login {
             email = webSocketAnswer.substring(0, iend); //this will give abc
             pw = webSocketAnswer.substring(iend+3, length); //this will give abc
         }
-        System.out.println("PW: " + pw);
-        System.out.println("Email: " + email);
-        return true;
+        if (pw.equalsIgnoreCase(pw) && email.equalsIgnoreCase(emailRoot)) {
+            return true;
+        }
+        return false;
 
         //TODO Überprüfung ob Email und PW existieren
     }
