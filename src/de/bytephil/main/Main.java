@@ -122,9 +122,6 @@ public class Main {
         app.get("/home", ctx -> {
             ctx.render("/public/home.html");
         });
-        app.get("/logout", ctx -> {
-            ctx.render("/public/logout.html");
-        });
     }
     public void copyFile(File newFile, String existingFile) throws IOException {
         newFile.createNewFile();

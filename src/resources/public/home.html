@@ -76,9 +76,7 @@
         ws.onmessage = messageEvent => {
             var wsinput = messageEvent.data;
             if (wsinput.includes("CLOSE")) {
-                const location1 = location.toString();
-                const loc = location1.replace("home", "logout");
-                window.location.href = loc;
+                window.location.href = location.protocol + "login?renew";
             }
         }
     }
