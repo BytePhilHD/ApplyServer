@@ -33,7 +33,5 @@ public class Login {
             return true;
         }
         return false;
-
-        //TODO Überprüfung ob Email und PW existieren
     }
 }

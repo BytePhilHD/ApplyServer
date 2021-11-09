@@ -35,7 +35,7 @@ public class Main {
 
         new LogFile().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
-        ApplicationService.addnew("BytePhil", "BytePhil#9293");
+        //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
@@ -145,7 +145,6 @@ public class Main {
             newFile.createNewFile();
         }
     }
-
 
     private SslContextFactory getSslContextFactory() {
         SslContextFactory sslContextFactory = new SslContextFactory();
