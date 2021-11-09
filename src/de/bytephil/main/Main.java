@@ -1,9 +1,8 @@
 package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
-import de.bytephil.utils.Login;
-import de.bytephil.utils.ServerConfiguration;
 import io.javalin.Javalin;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
@@ -33,6 +32,8 @@ public class Main {
     public boolean debugMSG = false;
 
     public void start() throws IOException {
+
+        new LogFile().logFileCreation();
 
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
@@ -78,15 +79,15 @@ public class Main {
                 if (message.contains("LOGIN")) {
                     message = message.replace("LOGIN: ", "");
                     if (Login.login(message)) {
-                        ctx.send("CORRECT");
+                        ctx.send("CORRECT " + ctx.getSessionId());
+                        logtIn.add(ctx.getSessionId());
+                        Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId(), MessageType.INFO);
                     } else {
                         ctx.send("WRONG");
                     }
                 }
             });
         });
-
-        //TODO - home.html file input at line 25 (currently not creating a imageURL maybe because file is not found with document.upload ...)
 
         app.ws("/login", ws -> {
             ws.onConnect(ctx -> {

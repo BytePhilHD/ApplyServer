@@ -29,7 +29,7 @@ public class Login {
             email = webSocketAnswer.substring(0, iend); //this will give abc
             pw = webSocketAnswer.substring(iend+3, length); //this will give abc
         }
-        if (pw.equalsIgnoreCase(pw) && email.equalsIgnoreCase(emailRoot)) {
+        if (pw.equalsIgnoreCase(password) && email.equalsIgnoreCase(emailRoot)) {
             return true;
         }
         return false;
