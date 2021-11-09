@@ -34,6 +34,8 @@ public class Main {
     public void start() throws IOException {
 
         new LogFile().logFileCreation();
+        checkandCreateFile("data/Applications.txt", "data");
+        ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
@@ -133,6 +135,15 @@ public class Main {
             configOutputStream.write(buffer, 0, readBytes);
         }
         defaultConfStream.close();
+    }
+
+    public static void checkandCreateFile(String path, String folder) throws IOException {
+        if (!new File(path).exists()) {
+            File dir = new File(folder);
+            if (!dir.exists()) dir.mkdirs();
+            final File newFile = new File(path);
+            newFile.createNewFile();
+        }
     }
 
 
