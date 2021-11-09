@@ -81,7 +81,7 @@ public class Main {
                     if (Login.login(message)) {
                         ctx.send("CORRECT " + ctx.getSessionId());
                         logtIn.add(ctx.getSessionId());
-                        Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId(), MessageType.INFO);
+                        Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId() + ", IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
                     } else {
                         ctx.send("WRONG");
                     }
