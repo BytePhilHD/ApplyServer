@@ -31,8 +31,7 @@ public class Main {
     public String version = "0.0.2";
     public boolean debugMSG = false;
 
-    public void start() throws IOException {
-
+    public void startUp() throws IOException {
         new LogFile().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
@@ -52,6 +51,13 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
+        MySQLService.startMySQL();
+
+        startApp();
+    }
+
+
+    public void startApp() throws IOException {
 
         Javalin app = Javalin.create(config -> {
             config.addStaticFiles("/public");
