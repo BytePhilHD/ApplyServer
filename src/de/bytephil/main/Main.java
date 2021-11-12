@@ -4,6 +4,9 @@ import de.bytephil.enums.MessageType;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.io.*;
@@ -51,7 +54,7 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
-        MySQLService.startMySQL();
+        //MySQLService.startMySQL();
 
         startApp();
     }
@@ -61,7 +64,23 @@ public class Main {
 
         Javalin app = Javalin.create(config -> {
             config.addStaticFiles("/public");
-        }).start(config.port);
+            config.server(() -> {
+                Server server = new Server();
+                ArrayList<Connector> connectors = new ArrayList<>();
+                if (this.config.https) {
+                    ServerConnector sslConnector = new ServerConnector(server, getSslContextFactory());
+                    sslConnector.setPort(this.config.sslPort);
+                    connectors.add(sslConnector);
+                }
+                if (this.config.http) {
+                    ServerConnector connector = new ServerConnector(server);
+                    connector.setPort(this.config.port);
+                    connectors.add(connector);
+                }
+                server.setConnectors(connectors.toArray(new Connector[0]));
+                return server;
+            });
+        }).start();
 
         if (debugMSG) {
             Console.printout("Debug Messages Enabled! To turn off, change \"debugMSG=true\" to \"debugMSG=false\" in your server.cfg!", MessageType.WARNING);
