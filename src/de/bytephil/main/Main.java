@@ -8,6 +8,7 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.websocket.api.Session;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class Main {
     public boolean debugMSG = false;
 
     public void startUp() throws IOException {
+       // new FileService().testandcreateFile("test/index.html", "resources/public/index.html");
+        new FileService().testandcreateFile("test/assets", "resources/public/assets");
         new LogFile().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
@@ -150,6 +153,7 @@ public class Main {
             ctx.render("/public/home.html");
         });
     }
+
     public void copyFile(File newFile, String existingFile) throws IOException {
         newFile.createNewFile();
         final FileOutputStream configOutputStream = new FileOutputStream(newFile);
