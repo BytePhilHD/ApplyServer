@@ -32,15 +32,4 @@ public class FileService {
                 });
     }
 
-    public void copyFile(File newFile, String existingFile) throws IOException {
-        newFile.createNewFile();
-        final FileOutputStream configOutputStream = new FileOutputStream(newFile);
-        byte[] buffer = new byte[4096];
-        final InputStream defaultConfStream = getClass().getClassLoader().getResourceAsStream(existingFile);
-        int readBytes;
-        while ((readBytes = defaultConfStream.read(buffer)) > 0) {
-            configOutputStream.write(buffer, 0, readBytes);
-        }
-        defaultConfStream.close();
-    }
 }
