@@ -1,58 +1,57 @@
 package de.bytephil.utils;
 
+import io.javalin.core.util.FileUtil;
+import org.codehaus.plexus.util.FileUtils;
+
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileService {
 
-    public void testandcreateFile(String path, String existingFile) throws IOException {
+    public void testandcreateFile(String path, String existingFile, boolean isdirectory) throws IOException {
         if (!new File(path).exists()) {
-            final File file = new File(path);
-            if (file.isDirectory()) {
+            final File destinationFile = new File(path);
+            final File sourceDirectory1 = new File(existingFile);
 
-            } else {
-                try {
-                    String folder;
-                    int iend = path.indexOf("/");
-                    if (iend != -1) {
-                        folder = path.substring(0, iend);
-                        File dir = new File(folder);
-                        if (!dir.exists()) dir.mkdirs();
-                    }
-                } catch (Exception e1) {
+            /*
+            try {
+                String folder;
+                int iend = path.indexOf("/");
+                if (iend != -1) {
+                    folder = path.substring(0, iend);
+                    File dir = new File(folder);
+                    if (!dir.exists()) dir.mkdirs();
                 }
+            } catch (Exception e1) {}
 
-                copyFile(file, existingFile);
+             */
+
+            if (isdirectory) {
+
+                //FileUtils.copyDirectory(sourceDirectory, destinationFile);
+            } else {
+                copyFile(destinationFile, existingFile);
             }
         }
     }
-
-    public void copyDirectory(File sourceDirectory, File destinationDirectory) throws IOException {
-        if (!destinationDirectory.exists()) {
-            destinationDirectory.mkdir();
-        }
-        for (String f : sourceDirectory.list()) {
-            copyDirectoryCompatibityMode(new File(sourceDirectory, f), new File(destinationDirectory, f));
-        }
-    }
-
-    public void copyDirectoryCompatibityMode(File source, File destination) throws IOException {
-        if (source.isDirectory()) {
-            copyDirectory(source, destination);
-        } else {
-            copyDirectoryFiles(source, destination);
-        }
-    }
-
-    private void copyDirectoryFiles(File sourceFile, File destinationFile)
-            throws IOException {
-        try (InputStream in = new FileInputStream(sourceFile);
-             OutputStream out = new FileOutputStream(destinationFile)) {
-            byte[] buf = new byte[1024];
-            int length;
-            while ((length = in.read(buf)) > 0) {
-                out.write(buf, 0, length);
-            }
-        }
+    public void copyDirectory(String resourcesName, String destinationDirectoryLocation) throws IOException, URISyntaxException {
+        URL res = getClass().getClassLoader().getResource(resourcesName);
+        File file = Paths.get(res.toURI()).toFile();
+        String sourceDirectoryLocation = file.getAbsolutePath();
+        Files.walk(Paths.get(sourceDirectoryLocation))
+                .forEach(source -> {
+                    Path destination = Paths.get(destinationDirectoryLocation, source.toString()
+                            .substring(sourceDirectoryLocation.length()));
+                    try {
+                        Files.copy(source, destination);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     public void copyFile(File newFile, String existingFile) throws IOException {

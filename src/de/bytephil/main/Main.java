@@ -11,6 +11,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Main {
@@ -35,11 +36,12 @@ public class Main {
     public String version = "0.0.2";
     public boolean debugMSG = false;
 
-    public void startUp() throws IOException {
+    public void startUp() throws IOException, URISyntaxException {
        // new FileService().testandcreateFile("test/index.html", "resources/public/index.html");
-        new FileService().testandcreateFile("test/assets", "resources/public/assets");
+        new FileService().testandcreateFile("test/assets", "./resources/public/assets", true);
         new LogFile().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
+        new FileService().copyDirectory("resources/public/assets", "test/assets");
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
