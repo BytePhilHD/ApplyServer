@@ -4,11 +4,11 @@ import de.bytephil.enums.MessageType;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.websocket.api.Session;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -37,11 +37,9 @@ public class Main {
     public boolean debugMSG = false;
 
     public void startUp() throws IOException, URISyntaxException {
-       // new FileService().testandcreateFile("test/index.html", "resources/public/index.html");
-        new FileService().testandcreateFile("test/assets", "./resources/public/assets", true);
+        new FileService().copyDirectoryfromResources("resources/public", "Webpages");
         new LogFile().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
-        new FileService().copyDirectory("resources/public/assets", "test/assets");
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
@@ -68,7 +66,7 @@ public class Main {
     public void startApp() throws IOException {
 
         Javalin app = Javalin.create(config -> {
-            config.addStaticFiles("/public");
+            config.addStaticFiles("WebPages", Location.EXTERNAL);
             config.server(() -> {
                 Server server = new Server();
                 ArrayList<Connector> connectors = new ArrayList<>();

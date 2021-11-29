@@ -12,33 +12,11 @@ import java.nio.file.Paths;
 
 public class FileService {
 
-    public void testandcreateFile(String path, String existingFile, boolean isdirectory) throws IOException {
-        if (!new File(path).exists()) {
-            final File destinationFile = new File(path);
-            final File sourceDirectory1 = new File(existingFile);
 
-            /*
-            try {
-                String folder;
-                int iend = path.indexOf("/");
-                if (iend != -1) {
-                    folder = path.substring(0, iend);
-                    File dir = new File(folder);
-                    if (!dir.exists()) dir.mkdirs();
-                }
-            } catch (Exception e1) {}
-
-             */
-
-            if (isdirectory) {
-
-                //FileUtils.copyDirectory(sourceDirectory, destinationFile);
-            } else {
-                copyFile(destinationFile, existingFile);
-            }
+    public void copyDirectoryfromResources(String resourcesName, String destinationDirectoryLocation) throws IOException, URISyntaxException {
+        if (new File(destinationDirectoryLocation).exists()) {
+            return;
         }
-    }
-    public void copyDirectory(String resourcesName, String destinationDirectoryLocation) throws IOException, URISyntaxException {
         URL res = getClass().getClassLoader().getResource(resourcesName);
         File file = Paths.get(res.toURI()).toFile();
         String sourceDirectoryLocation = file.getAbsolutePath();
