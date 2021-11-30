@@ -40,7 +40,7 @@ public class Main {
         new FileService().copyDirectoryfromResources("resources/public", "Webpages");
         new LogService().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
-        new LogService().writetoFile(new File("logs/log.txt"), "Hallo", MessageType.INFO);
+        new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
@@ -85,6 +85,7 @@ public class Main {
             });
         }).start();
 
+        new LogService().writetoFile(new File("logs/log.txt"), "The program successfully started!", MessageType.INFO);
         if (debugMSG) {
             Console.printout("Debug Messages Enabled! To turn off, change \"debugMSG=true\" to \"debugMSG=false\" in your server.cfg!", MessageType.WARNING);
         }
@@ -97,6 +98,7 @@ public class Main {
         app.ws("/checklogin", ws -> {
             ws.onConnect(ctx -> {
                 Console.printout("[/websockets] Client connected with Session-ID: " + ctx.getSessionId() + " IP: " + ctx.session.getRemoteAddress(), MessageType.DEBUG);
+                new LogService().writetoFile(new File("logs/log.txt"), "Client connected with Session-ID: " + ctx.getSessionId() + " IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
                 clients.add(ctx.getSessionId());
             });
             ws.onClose(ctx -> {
@@ -112,6 +114,7 @@ public class Main {
                         ctx.send("CORRECT " + ctx.getSessionId());
                         logtIn.add(ctx.getSessionId());
                         Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId() + ", IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
+                        new LogService().writetoFile(new File("logs/log.txt"), "Client logged in successfully with IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
                     } else {
                         ctx.send("WRONG");
                     }
@@ -136,6 +139,7 @@ public class Main {
                         logtIn.remove(message);
                     } else {
                         ctx.send("CLOSE");
+                        new LogService().writetoFile(new File("logs/log.txt"), "Client disconnected with IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
                     }
                 } else if (message.contains("FILE")) {
                     String url = message.replace("FILE: ", "").replace("blob:", "");

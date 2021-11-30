@@ -10,13 +10,14 @@ The program is currently under development and is not finished yet!
 - [ ] Improve webdesign
 - [ ] Create account function
 - [ ] Improve security
-- [ ] Logs function (file where every connection etc. is listed)
 
 ## Finished List
 
 - [x] Login Page (with one Account)
 - [x] Secured home page (can't access without logging in before)
 - [x] Config file for server settings
+- [x] Logs function (file where every connection etc. is listed)
+- [x] Customizable webdesign (access to all html etc files)
 
 ## Downloads:
 
