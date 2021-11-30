@@ -28,7 +28,7 @@ public class Main {
         instance = this;
     }
 
-    private static String password;
+    public static String password;
     private static ArrayList<String> clients = new ArrayList<>();
     private static ArrayList<String> logtIn = new ArrayList<>();
 
@@ -38,8 +38,9 @@ public class Main {
 
     public void startUp() throws IOException, URISyntaxException {
         new FileService().copyDirectoryfromResources("resources/public", "Webpages");
-        new LogFile().logFileCreation();
+        new LogService().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
+        new LogService().writetoFile(new File("logs/log.txt"), "Hallo", MessageType.INFO);
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
@@ -58,7 +59,6 @@ public class Main {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
         //MySQLService.startMySQL();
-
         startApp();
     }
 
