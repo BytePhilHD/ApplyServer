@@ -16,7 +16,7 @@ public class MailService {
     public static void main(String[] args) {
 
         final String username = "phitho2018@gmail.com";
-        final String password = "Collins234!_";
+        final String password = "*******";
 
 
         //TODO Get username and password from file
