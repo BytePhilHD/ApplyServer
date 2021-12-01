@@ -1,5 +1,6 @@
 package de.bytephil.utils;
 
+import de.bytephil.enums.MessageType;
 import io.javalin.core.util.FileUtil;
 
 
@@ -9,6 +10,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FileService {
 
