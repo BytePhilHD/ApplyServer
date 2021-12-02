@@ -4,6 +4,7 @@ public class Config {
 
     public boolean autoUpdate;
     public String password;
+    public String username;
     public boolean debugMSG;
 
     public boolean http;

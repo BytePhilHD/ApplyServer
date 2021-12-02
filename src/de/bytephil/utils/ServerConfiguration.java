@@ -28,6 +28,7 @@ public class ServerConfiguration extends Config {
         }
         port = Integer.parseInt(prop.getProperty("http.port", "80"));
         password = prop.getProperty("password", "YourPW!");
+        username = prop.getProperty("adminusername", "admin");
         debugMSG = Boolean.parseBoolean(prop.getProperty("debugMSG", "false"));
 
         autoUpdate = Boolean.parseBoolean(prop.getProperty("app.autoUpdate", "true"));

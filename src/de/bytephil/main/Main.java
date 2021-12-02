@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class Main {
 
+
     private static Javalin app;
     private static java.lang.Thread thread;
 
@@ -29,6 +30,7 @@ public class Main {
     }
 
     public static String password;
+    public static String username;
     private static ArrayList<String> clients = new ArrayList<>();
     private static ArrayList<String> logtIn = new ArrayList<>();
 
@@ -37,8 +39,10 @@ public class Main {
     public boolean debugMSG = false;
 
     public void startUp() throws IOException, URISyntaxException {
-        new FileService().copyDirectoryfromResources("resources/public", "Webpages");
+        new FileService().copyDirectoryfromResources("resources/public", "WebPages");
+
         new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
+
         new LogService().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
         new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
@@ -56,6 +60,7 @@ public class Main {
             Console.printout("Config was successfully loaded!", MessageType.INFO);
             password = config.password;
             debugMSG = config.debugMSG;
+            username = config.username;
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
@@ -111,7 +116,7 @@ public class Main {
 
                 if (message.contains("LOGIN")) {
                     message = message.replace("LOGIN: ", "");
-                    if (Login.login(message)) {
+                    if (LogInService.login(message)) {
                         ctx.send("CORRECT " + ctx.getSessionId());
                         logtIn.add(ctx.getSessionId());
                         Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId() + ", IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
