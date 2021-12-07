@@ -1,6 +1,8 @@
 package de.bytephil.utils;
 
 
+import de.bytephil.main.Main;
+
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,18 +15,20 @@ import javax.mail.internet.MimeMessage;
 
 public class MailService {
 
-    public static void main(String[] args) {
+    public static void sendEmail() {
 
-        final String username = "phitho2018@gmail.com";
-        final String password = "*******";
+        ServerConfiguration configuration = Main.config;
+
+        final String username = configuration.emailuser;
+        final String password = configuration.emailpassword;
 
 
         //TODO Get username and password from file
 
 
         Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
+        prop.put("mail.smtp.host", configuration.emailhost);
+        prop.put("mail.smtp.port", configuration.emailport);
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.socketFactory.port", "465");
         prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");

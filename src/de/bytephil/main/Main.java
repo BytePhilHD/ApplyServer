@@ -34,7 +34,7 @@ public class Main {
     private static ArrayList<String> clients = new ArrayList<>();
     private static ArrayList<String> logtIn = new ArrayList<>();
 
-    private ServerConfiguration config;
+    public static ServerConfiguration config;
     public String version = "0.0.2";
     public boolean debugMSG = false;
 
@@ -64,6 +64,7 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
+        //MailService.sendEmail();
         //MySQLService.startMySQL();
         startApp();
     }
