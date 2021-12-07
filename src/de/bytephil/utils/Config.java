@@ -13,4 +13,11 @@ public class Config {
     public int sslPort;
     public  String keystorePath;
     public String keystorePW;
+
+    // EMAIL
+
+    public String emailhost;
+    public int emailport;
+    public String emailuser;
+    public String emailpassword;
 }

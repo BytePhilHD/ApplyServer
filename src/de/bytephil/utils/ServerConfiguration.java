@@ -37,5 +37,11 @@ public class ServerConfiguration extends Config {
         sslPort = Integer.parseInt(prop.getProperty("ssl.port", "443"));
         keystorePath = prop.getProperty("ssl.keystorePath", "keystore.jks");
         keystorePW = prop.getProperty("ssl.keystorePassword", "password");
+
+        // EMAIL
+        emailhost = prop.getProperty("email.smtp.host", "smtp.gmail.com");
+        emailport = Integer.parseInt(prop.getProperty("email.smtp.port", "465"));
+        emailuser = prop.getProperty("email.smtp.user", "testuser@gmail.com");
+        emailpassword = prop.getProperty("email.smtp.password", "yourPassword");
     }
 }

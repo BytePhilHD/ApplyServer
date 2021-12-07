@@ -1,10 +1,5 @@
 package de.bytephil.utils;
 
-import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
-import de.bytephil.enums.MessageType;
-import io.javalin.core.util.FileUtil;
-
-
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,11 +15,14 @@ import java.util.Map;
 public class FileService {
 
     public void copyDirectoryfromResources(String resourcesName, String destinationDirectoryLocation) throws IOException, URISyntaxException {
-        if (new File(destinationDirectoryLocation).exists()) {
+        /*if (new File(destinationDirectoryLocation).exists()) {
             return;
         }
+
+         */
         URL res = getClass().getClassLoader().getResource(resourcesName);
         System.out.println("Ressource " + res);
+        assert res != null;
         File file = Paths.get(res.toURI()).toFile();
         String sourceDirectoryLocation = file.getAbsolutePath();
         Files.walk(Paths.get(sourceDirectoryLocation))
@@ -38,5 +36,4 @@ public class FileService {
                     }
                 });
     }
-
 }
