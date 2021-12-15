@@ -67,6 +67,7 @@ public class Main {
         MailService.setupEmail();
         MailService.sendEmail("phitho2018@gmail.com");
         //MySQLService.startMySQL();
+        Console.sendBanner();
         startApp();
     }
 
@@ -91,6 +92,7 @@ public class Main {
                 server.setConnectors(connectors.toArray(new Connector[0]));
                 return server;
             });
+            config.showJavalinBanner = false;
         }).start();
 
         new LogService().writetoFile(new File("logs/log.txt"), "The program successfully started!", MessageType.INFO);
