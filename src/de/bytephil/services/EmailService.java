@@ -1,4 +1,4 @@
-package de.bytephil.utils;
+package de.bytephil.services;
 
 import java.util.Properties;
 import javax.mail.*;

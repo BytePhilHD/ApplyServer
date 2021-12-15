@@ -1,6 +1,9 @@
 package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.services.FileService;
+import de.bytephil.services.LogInService;
+import de.bytephil.services.LogService;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
@@ -41,7 +44,7 @@ public class Main {
     public void startUp() throws IOException, URISyntaxException {
         new FileService().copyDirectoryfromResources("resources/public", "WebPages");
 
-        new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
+       // new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
 
         new LogService().logFileCreation();
         checkandCreateFile("data/Applications.txt", "data");
@@ -65,8 +68,6 @@ public class Main {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
         // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
-        //MailService.setupEmail();
-        //MailService.sendEmail("phitho2018@gmail.com");
         //MySQLService.startMySQL();
         Console.sendBanner();
         startApp();

@@ -1,4 +1,4 @@
-package de.bytephil.utils;
+package de.bytephil.services;
 
 import de.bytephil.enums.MessageType;
 

@@ -1,4 +1,4 @@
-package de.bytephil.utils;
+package de.bytephil.services;
 
 import java.io.*;
 import java.net.URISyntaxException;
