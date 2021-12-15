@@ -64,8 +64,9 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
-        MailService.setupEmail();
-        MailService.sendEmail("phitho2018@gmail.com");
+        // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
+        //MailService.setupEmail();
+        //MailService.sendEmail("phitho2018@gmail.com");
         //MySQLService.startMySQL();
         Console.sendBanner();
         startApp();
