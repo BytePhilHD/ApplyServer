@@ -70,6 +70,7 @@ public class Main {
         // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
         //MySQLService.startMySQL();
         Console.sendBanner();
+        //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
         startApp();
     }
 

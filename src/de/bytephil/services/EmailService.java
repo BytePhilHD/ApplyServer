@@ -1,12 +1,16 @@
 package de.bytephil.services;
 
+import de.bytephil.main.Main;
+import de.bytephil.utils.ServerConfiguration;
+
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailService {
 
-    public static void send(String from,String password,String to,String sub,String msg){
+    public static void send(String to,String sub,String msg){
+        ServerConfiguration configuration = Main.config;
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -19,7 +23,7 @@ public class EmailService {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(from,password);
+                        return new PasswordAuthentication(configuration.emailuser,configuration.emailpassword);
                     }
                 });
         //compose message

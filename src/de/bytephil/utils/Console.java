@@ -25,7 +25,7 @@ public class Console {
         System.out.println("    /_/  |_/ .___/ .___/_/\\__, //____/\\___/_/    |___/\\___/_/     ");
         System.out.println("          /_/   /_/      /____/                                   ");
         System.out.println(" ");
-        System.out.println("               Version: " + Main.getInstance().version + " | Made by BytePhil.de");
+        System.out.println("               Version: " + Main.getInstance().version + " | Made by BytePhil | https://bytephil.de/");
         System.out.println(" ");
     }
 }
