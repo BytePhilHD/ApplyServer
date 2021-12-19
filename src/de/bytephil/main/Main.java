@@ -42,12 +42,12 @@ public class Main {
     public boolean debugMSG = false;
 
     public void startUp() throws IOException, URISyntaxException {
+        checkandCreateFile("data/Applications.txt", "data");
         new FileService().copyDirectoryfromResources("resources/public", "WebPages");
 
        // new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
 
         new LogService().logFileCreation();
-        checkandCreateFile("data/Applications.txt", "data");
         new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 

@@ -8,6 +8,9 @@ import java.util.Date;
 
 public class Console {
     public static void printout(String message, MessageType type) {
+        if (!Main.getInstance().debugMSG) {
+            return;
+        }
         System.out.println("[" + getTime() + "] " + type + " - " + message);
     }
     public static void empty() {
