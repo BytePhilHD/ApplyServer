@@ -38,12 +38,12 @@ public class Main {
     private static ArrayList<String> logtIn = new ArrayList<>();
 
     public static ServerConfiguration config;
-    public String version = "0.0.2";
+    public final String version = "0.0.2";
     public boolean debugMSG = false;
 
     public void startUp() throws IOException, URISyntaxException {
         checkandCreateFile("data/Applications.txt", "data");
-        new FileService().copyDirectoryfromResources("resources/public", "WebPages");
+        new FileService().copyDirectoryfromResources("public/", "WebPages");
 
        // new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
 
@@ -54,7 +54,7 @@ public class Main {
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
             final File newFile = new File("server.cfg");
-            copyFile(newFile, "resources/default.cfg");
+            copyFile(newFile, "default.cfg");
         }
 
         // Load config
