@@ -3,14 +3,7 @@ package de.bytephil.services;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.*;
 
 public class FileService {
 
@@ -20,7 +13,7 @@ public class FileService {
         }
 
         URL res = getClass().getClassLoader().getResource(resourcesName);
-        System.out.println("Ressource " + res);
+        System.out.println("Resource " + res);
         assert res != null;
         File file = Paths.get(res.toURI()).toFile();
         String sourceDirectoryLocation = file.getAbsolutePath();
