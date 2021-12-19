@@ -43,7 +43,7 @@ public class Main {
 
     public void startUp() throws IOException, URISyntaxException {
         checkandCreateFile("data/Applications.txt", "data");
-        new FileService().copyDirectoryfromResources("public", "WebPages");
+        new FileService().copyDirectoryfromResources("public/", "WebPages");
 
        // new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
 
