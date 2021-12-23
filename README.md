@@ -11,7 +11,7 @@ The program is currently under development and is not finished yet!
 - [ ] Create account function
 - [ ] Improve security
 
-## Finished List
+## Feature List
 
 - [x] Login Page (with one Account)
 - [x] Secured home page (can't access without logging in before)

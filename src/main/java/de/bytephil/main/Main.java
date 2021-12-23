@@ -1,6 +1,7 @@
 package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.services.ApplicationService;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
@@ -70,6 +71,12 @@ public class Main {
         // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
         //MySQLService.startMySQL();
         Console.sendBanner();
+
+        // TEST
+
+        new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
+
+        // TEST
         //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
         startApp();
     }
@@ -163,11 +170,26 @@ public class Main {
                 Console.printout(ctx.error().toString(), MessageType.ERROR);
             });
         });
+
+        app.ws("/verify", ws -> {
+            ws.onMessage(ctx -> {
+                String message = ctx.message().replace("?", "");
+                if (AccountManager.checkVerify(message)) {
+                    ctx.send("VERIFIED");
+                }
+                else {
+                    ctx.send("WRONG");
+                }
+            });
+        });
         app.get("/login", ctx -> {
             ctx.render("/public/login.html");
         });
         app.get("/home", ctx -> {
             ctx.render("/public/home.html");
+        });
+        app.get("/verify", ctx -> {
+            ctx.render("/public/verify.html");
         });
     }
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class AccountManager {
 
-    private HashMap<String, String> userRegistration = new HashMap<>();
+    private static HashMap<String, String> userRegistration = new HashMap<>();
 
     public void addUser(String name, String username, String email, String password) throws IOException {
 
@@ -38,11 +38,26 @@ public class AccountManager {
     public void createAccount(String name, String username, String email, String password) {
         String passwordRegistration = PasswordGenerator.generateRandomPassword(20);
 
-        EmailService.send(email, "Verify your Registration on ApplyServer", "Hi " + username + "! \n \n" +
+        /*EmailService.send(email, "Verify your Registration on ApplyServer", "Hi " + username + "! \n \n" +
                 "To Complete your registration on ApplyServer, click the following link: https://bytephil.de/ \n " +
                 "If you didn't sent this registration, ignore this email. \n \n" +
                 "Made by BytePhil.de");
 
-        userRegistration.put(username, passwordRegistration);
+         */
+        System.out.println("LINK TO VERIFY: http://localhost/verify?" + passwordRegistration);
+
+        userRegistration.put(passwordRegistration, username);
+        if (userRegistration.containsKey(passwordRegistration)) {
+            System.out.println("TRUE");
+        }
+    }
+
+    public static boolean checkVerify(String password) {
+        if (userRegistration.containsKey(password)) {
+            System.out.println("Created account: " + userRegistration.get(password));
+            return true;
+        }
+        System.out.println("Wrong");
+        return false;
     }
 }
