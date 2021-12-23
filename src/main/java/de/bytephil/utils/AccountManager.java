@@ -36,7 +36,7 @@ public class AccountManager {
         Console.printout("User " + username + " succefully added", MessageType.INFO);
     }
 
-    public void createAccount(String name, String username, String email, String password) {
+    public void createAccount(String username, String email, String password) {
         String passwordRegistration = PasswordGenerator.generateRandomPassword(20);
         String link = Main.config.address + "verify?" + passwordRegistration;
 
@@ -52,6 +52,8 @@ public class AccountManager {
         if (userRegistration.containsKey(password)) {
             // TODO Safe created account
             System.out.println("Created account: " + userRegistration.get(password));
+
+            userRegistration.remove(password);
             return true;
         }
         return false;

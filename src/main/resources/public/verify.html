@@ -51,9 +51,6 @@
                     console.log("send " + location.search);
                 }
             }
-            ws.onclose = closeEvent => {
-                setupWebSocket();
-            }
             ws.onerror = errorEvent => {
                 console.log('Server Error!');
             }
@@ -62,6 +59,7 @@
                 if (wsinput.includes("VERIFIED")) {
                     document.getElementById("verify").innerHTML = "Successfully verified your account!";
                     console.log("Successfully verified!");
+                    ws.close();
 
                 } else if (wsinput.includes("WRONG")) {
                     document.getElementById("verify").innerHTML = "Something went wrong! Please check your Link again!";

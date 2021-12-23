@@ -74,7 +74,7 @@ public class Main {
 
         // TEST
 
-        new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
+        new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
 
         // TEST
         //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
@@ -180,6 +180,11 @@ public class Main {
                 else {
                     ctx.send("WRONG");
                 }
+            });
+        });
+        app.ws("/register", ws -> {
+            ws.onMessage(ctx -> {
+                String message = ctx.message();
             });
         });
         app.get("/login", ctx -> {
