@@ -60,11 +60,11 @@
             ws.onmessage = messageEvent => {
                 var wsinput = messageEvent.data;
                 if (wsinput.includes("VERIFIED")) {
-                    document.getElementById("verify").value = "Successfully verified your account!";
+                    document.getElementById("verify").innerHTML = "Successfully verified your account!";
                     console.log("Successfully verified!");
 
                 } else if (wsinput.includes("WRONG")) {
-                    document.getElementById("verify").value = "Something went wrong! Please check your Link again!";
+                    document.getElementById("verify").innerHTML = "Something went wrong! Please check your Link again!";
                 }
             }
         }

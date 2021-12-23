@@ -1,6 +1,7 @@
 package de.bytephil.utils;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.main.Main;
 import de.bytephil.services.EmailService;
 
 import java.io.*;
@@ -37,27 +38,22 @@ public class AccountManager {
 
     public void createAccount(String name, String username, String email, String password) {
         String passwordRegistration = PasswordGenerator.generateRandomPassword(20);
+        String link = Main.config.address + "verify?" + passwordRegistration;
 
-        /*EmailService.send(email, "Verify your Registration on ApplyServer", "Hi " + username + "! \n \n" +
-                "To Complete your registration on ApplyServer, click the following link: https://bytephil.de/ \n " +
+        EmailService.send(email, "Verify your Registration on ApplyServer", "Hi " + username + "! \n \n" +
+                "To Complete your registration on ApplyServer, click the following link: " + link + " \n " +
                 "If you didn't sent this registration, ignore this email. \n \n" +
                 "Made by BytePhil.de");
 
-         */
-        System.out.println("LINK TO VERIFY: http://localhost/verify?" + passwordRegistration);
-
         userRegistration.put(passwordRegistration, username);
-        if (userRegistration.containsKey(passwordRegistration)) {
-            System.out.println("TRUE");
-        }
     }
 
     public static boolean checkVerify(String password) {
         if (userRegistration.containsKey(password)) {
+            // TODO Safe created account
             System.out.println("Created account: " + userRegistration.get(password));
             return true;
         }
-        System.out.println("Wrong");
         return false;
     }
 }

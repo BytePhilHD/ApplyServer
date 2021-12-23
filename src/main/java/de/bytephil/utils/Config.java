@@ -6,6 +6,7 @@ public class Config {
     public String password;
     public String username;
     public boolean debugMSG;
+    public String address;
 
     public boolean http;
     public boolean https;

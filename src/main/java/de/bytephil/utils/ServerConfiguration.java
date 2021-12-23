@@ -30,6 +30,7 @@ public class ServerConfiguration extends Config {
         password = prop.getProperty("password", "YourPW!");
         username = prop.getProperty("adminusername", "admin");
         debugMSG = Boolean.parseBoolean(prop.getProperty("debugMSG", "false"));
+        address = prop.getProperty("webaddress", "https://bytephil.de/");
 
         autoUpdate = Boolean.parseBoolean(prop.getProperty("app.autoUpdate", "true"));
         http = Boolean.parseBoolean(prop.getProperty("http.activated", "true"));
