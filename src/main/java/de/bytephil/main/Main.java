@@ -74,7 +74,7 @@ public class Main {
 
         // TEST
 
-        new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
+       // new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
 
         // TEST
         //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
@@ -185,6 +185,7 @@ public class Main {
         app.ws("/register", ws -> {
             ws.onMessage(ctx -> {
                 String message = ctx.message();
+                StringSplitter.createAccount(message);
             });
         });
         app.get("/login", ctx -> {
@@ -195,6 +196,9 @@ public class Main {
         });
         app.get("/verify", ctx -> {
             ctx.render("/public/verify.html");
+        });
+        app.get("/registration", ctx -> {
+            ctx.render("/public/registration.html");
         });
     }
 

@@ -46,6 +46,7 @@ public class AccountManager {
                 "Made by BytePhil.de");
 
         userRegistration.put(passwordRegistration, username);
+        Console.printout("Sent out registration Mail for user " + username, MessageType.INFO);
     }
 
     public static boolean checkVerify(String password) {
