@@ -1,7 +1,6 @@
 package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
-import de.bytephil.services.ApplicationService;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
@@ -41,6 +40,7 @@ public class Main {
     public static ServerConfiguration config;
     public final String version = "0.0.2";
     public boolean debugMSG = false;
+    public boolean testing = false;
 
     public void startUp() throws IOException, URISyntaxException {
         checkandCreateFile("data/Applications.txt", "data");
@@ -71,6 +71,13 @@ public class Main {
         // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
         //MySQLService.startMySQL();
         Console.sendBanner();
+
+        if (new File("testing.xyz").exists()) {
+            testing = true;
+            Console.empty();
+            Console.printout("Test Mode active! To disable, delete the file \"testing.xyz\" from the folder!", MessageType.WARNING);
+            Console.empty();
+        }
 
         // TEST
 

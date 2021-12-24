@@ -1,5 +1,7 @@
 package de.bytephil.services;
 
+import de.bytephil.main.Main;
+
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,7 +16,7 @@ import java.util.jar.JarFile;
 public class FileService {
 
     public void copyDirectoryfromResources(String resourcesName, String destinationDirectoryLocation) throws IOException, URISyntaxException {
-        if (new File(destinationDirectoryLocation).exists()) {
+        if (new File(destinationDirectoryLocation).exists() && !Main.getInstance().testing) {
             return;
         }
         try {
