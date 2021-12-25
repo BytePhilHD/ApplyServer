@@ -47,6 +47,7 @@
         <div class="form-group">
             <button onclick="manageInput()" class="btn btn-primary btn-block" type="submit">Create Account</button>
         </div>
+    </form>
 
         <script>
             window.onload = setupWebSocket;
@@ -68,7 +69,7 @@
                 let inemail = document.getElementById("email").value;
                 document.getElementById('pw').value = '';
                 ws.send(inuser + "|*|" + inemail + "|'|" + inpw);          // "|*|" is placeholder between email and password, so Login.java can detect those
-                window.location.href = location.protocol + "";
+                window.location.href = location.protocol;
             }
 
             function setupWebSocket() {
