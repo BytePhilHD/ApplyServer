@@ -7,22 +7,30 @@ public class User {
     private String id;
     private String name;
     private String password;
+    private String email;
 
-    public User(String name, String password) {
+    public User(String name, String password, String email) {
         this.id = PasswordGenerator.generateID(10);
         this.name = name;
         this.password = password;
+        this.email = email;
     }
 
-    public User(String id, String name, String password) {
+    public User(String id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.email = email;
     }
 
     public String getName() {
         return name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

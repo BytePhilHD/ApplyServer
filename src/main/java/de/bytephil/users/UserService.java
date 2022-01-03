@@ -1,12 +1,10 @@
 package de.bytephil.users;
 
-
 import de.bytephil.enums.MessageType;
 import de.bytephil.utils.Console;
 import de.bytephil.utils.PasswordGenerator;
 import org.json.JSONObject;
 
-import javax.annotation.processing.FilerException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,13 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class UserServiceImpl {
+public class UserService {
 
     private final List<User> users;
 
-    public UserServiceImpl() {
+    public UserService() {
         this.users = new ArrayList<>();
         loadAll();
     }
@@ -47,7 +44,6 @@ public class UserServiceImpl {
                 return;
             }
         }
-
         users.add(user);
         updateAll();
     }
@@ -94,6 +90,7 @@ public class UserServiceImpl {
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", user.getName());
             jsonObject.put("password", user.getPassword());
+            jsonObject.put("email", user.getEmail());
             save(file, jsonObject);
         });
     }
@@ -116,6 +113,7 @@ public class UserServiceImpl {
             return null;
         }
     }
+
     public void save(File file, JSONObject jsonObject) {
         try {
             FileWriter writer = new FileWriter(file);

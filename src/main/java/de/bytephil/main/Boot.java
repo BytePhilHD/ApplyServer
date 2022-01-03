@@ -7,11 +7,11 @@ import java.net.URISyntaxException;
 
 public class Boot {
     public static void main(String[] args) throws IOException, URISyntaxException {
-        //new Main().startUp();
+        new Main().startUp();
 
         //
         // TEST
         //
-        new Test().testMethod();
+        //new Test().testMethod();
     }
 }
