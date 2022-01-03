@@ -4,6 +4,7 @@ import de.bytephil.enums.MessageType;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
+import de.bytephil.users.UserService;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
@@ -68,6 +69,8 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
+        File dir = new File("user");
+        if (!dir.exists()) dir.mkdirs();
         // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
         //MySQLService.startMySQL();
         Console.sendBanner();
@@ -236,4 +239,5 @@ public class Main {
         sslContextFactory.setKeyStorePassword(config.keystorePW);
         return sslContextFactory;
     }
+
 }

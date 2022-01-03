@@ -1,61 +1,26 @@
 package de.bytephil.users;
 
-
-import de.bytephil.enums.MessageType;
-import de.bytephil.utils.Console;
-import org.json.JSONObject;
-
-import javax.annotation.processing.FilerException;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class UserService {
+public interface UserService {
 
-    private final List<User> users = new ArrayList<>();
+    void createUser(User user);
 
-    public void loadAllUsers(File space) {
-        Arrays.stream(Objects.requireNonNull(space.listFiles())).forEach(file -> {
-            final JSONObject jsonUser = load(file);
-            final JSONObject jsonAccesses = jsonUser.getJSONObject("accesses");
+    void saveUser(User user);
 
-            final String name = file.getName().replaceFirst(".json", "");
+    User getUserByIdentifier(String identifier);
 
-            if (name.contains("%") || name.contains("#") || name.contains("'")) {
-                Console.printout("Error whilst trying to read users!", MessageType.ERROR);
-            } else {
-                final User user = new User(name, jsonUser.getString("name"), jsonUser.getString("password"));
+    User getUserByName(String name);
 
-                if (!user.getName().contains("%") && !user.getName().contains("#") && !user.getName().contains("'"))
-                    users.add(user);
-                else
-                    Console.printout("Error at UserService!", MessageType.ERROR);
-            }
-        });
-    }
+    User getUser(String id);
 
-    public JSONObject load(File file) {
-        try {
-            FileReader reader = new FileReader(file);
-            StringBuilder builder = new StringBuilder();
+    boolean existsUserByIdentifier(String identifier);
 
-            int read;
+    boolean existsUserByName(String name);
 
-            while ((read = reader.read()) != -1) {
-                builder.append((char) read);
-            }
+    boolean existsUser(String id);
 
-            reader.close();
+    void deleteUser(String id);
 
-            return new JSONObject(builder.toString());
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-
+    List<User> getUsers();
 }
-
