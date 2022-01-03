@@ -18,7 +18,12 @@ import java.util.stream.Collectors;
 
 public class UserServiceImpl {
 
-    private final List<User> users = new ArrayList<>();
+    private final List<User> users;
+
+    public UserServiceImpl() {
+        this.users = new ArrayList<>();
+        loadAll();
+    }
 
     public void createUser(User user) {
         if (getUserByName(user.getName()) != null)
@@ -44,6 +49,7 @@ public class UserServiceImpl {
         }
 
         users.add(user);
+        updateAll();
     }
 
     public void loadAll() {
@@ -53,7 +59,6 @@ public class UserServiceImpl {
     public void loadAll(File space) {
         Arrays.stream(Objects.requireNonNull(space.listFiles())).forEach(file -> {
             final JSONObject jsonUser = load(file);
-            final JSONObject jsonAccesses = jsonUser.getJSONObject("accesses");
 
             final String name = file.getName().replaceFirst(".json", "");
 

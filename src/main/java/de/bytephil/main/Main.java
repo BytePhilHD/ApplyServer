@@ -4,7 +4,6 @@ import de.bytephil.enums.MessageType;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
-import de.bytephil.users.UserService;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
@@ -47,8 +46,6 @@ public class Main {
         checkandCreateFile("data/Applications.txt", "data");
         new FileService().copyDirectoryfromResources("public/", "WebPages");
 
-       // new AccountManager().addUser("Phil", "BytePhil", "mail@mail", "password!");
-
         new LogService().logFileCreation();
         new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
         //ApplicationService.addnew("BytePhil", "BytePhil#9293");
@@ -71,8 +68,7 @@ public class Main {
         }
         File dir = new File("user");
         if (!dir.exists()) dir.mkdirs();
-        // Mailer.send("from@gmail.com","xxxxx","to@gmail.com","hello javatpoint","How r u?");
-        //MySQLService.startMySQL();
+
         Console.sendBanner();
 
         if (new File("testing.xyz").exists()) {
