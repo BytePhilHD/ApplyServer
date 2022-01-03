@@ -13,7 +13,7 @@ The program is currently under development and is not finished yet!
 ## Feature List
 
 - [x] Create account function
-- [x] Login Page (with one Account)
+- [x] Login Page
 - [x] Secured home page (can't access without logging in before)
 - [x] Config file for server settings
 - [x] Logs function (file where every connection etc. is listed)

@@ -2,17 +2,29 @@ package de.bytephil.utils;
 
 import de.bytephil.enums.MessageType;
 import de.bytephil.main.Main;
+import de.bytephil.services.LogService;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Console {
     public static void printout(String message, MessageType type) {
+
+        if (type == MessageType.DEBUG && !Main.getInstance().debugMSG) {
+            return;
+        }
         System.out.println("[" + getTime() + "] " + type + " - " + message);
+        try {
+            new LogService().writetoFile(new File("logs/log.txt"), message, type);
+        } catch (IOException e1) {}
     }
+
     public static void empty() {
         System.out.println("");
     }
+
     private static String getTime() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
