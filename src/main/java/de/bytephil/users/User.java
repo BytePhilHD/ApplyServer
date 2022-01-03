@@ -31,6 +31,8 @@ public class User {
         return email;
     }
 
+    public void setEmail() { this.email = email; }
+
     public void setName(String name) {
         this.name = name;
     }

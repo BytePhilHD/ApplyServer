@@ -80,7 +80,7 @@ public class Main {
 
         // TEST
 
-        new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
+       // new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
 
         // TEST
         //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
