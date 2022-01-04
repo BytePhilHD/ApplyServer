@@ -192,6 +192,7 @@ public class Main {
             ws.onMessage(ctx -> {
                 String message = ctx.message();
                 WebSocketHandler.createAccount(message);
+                ctx.send("SENT");
             });
         });
         app.ws("/application", ws -> {

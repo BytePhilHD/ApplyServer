@@ -73,6 +73,9 @@
                 } else if (location.search.includes("renew")) {
                     document.getElementById("console").innerHTML = "Please log in again!";
                     document.getElementById("console").value = "Please log in again!";
+                } else if (location.search.includes("registration")) {
+                    document.getElementById("console").innerHTML = "Please check your email!";
+                    document.getElementById("console").value = "Please check your email!";
                 } else {
                     window.location.href = location.protocol + "/login";
                 }

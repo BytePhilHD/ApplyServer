@@ -31,7 +31,7 @@
            href="#" style="width: 0;">Apply-Server</a></div>
 </nav>
 <div class="login-dark" style="height: 1240px;">
-    <form method="post">
+    <form>
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration" style="height: 154px;"><i class="icon ion-ios-personadd-outline"
                                                             style="height: 0px;"></i></div>
@@ -68,8 +68,12 @@
                 let inuser = document.getElementById("username").value;
                 let inemail = document.getElementById("email").value;
                 document.getElementById('pw').value = '';
-                ws.send(inuser + "|*|" + inemail + "|'|" + inpw);          // "|*|" is placeholder between email and password, so Login.java can detect those
-                window.location.href = location.protocol;
+                if (inpw !== "" && inuser !== "" && inemail !== "") {
+                    ws.send(inuser + "|*|" + inemail + "|'|" + inpw);          // "|*|" is placeholder between email and password, so Login.java can detect those
+                    window.location.href = location.protocol + "login?registration";
+                } else {
+                    window.location.href = location.protocol + "registration?empty";
+                }
             }
 
             function setupWebSocket() {
@@ -90,8 +94,8 @@
                 }
                 ws.onmessage = messageEvent => {
                     var wsinput = messageEvent.data;
-                    if (wsinput.includes("CORRECT")) {
-
+                    if (wsinput.includes("SENT")) {
+                        window.location.href = location.protocol + "login?registration";
                     }
                 }
             }
