@@ -43,18 +43,20 @@ public class Main {
     public boolean testing = false;
 
     public void startUp() throws IOException, URISyntaxException {
-        checkandCreateFile("data/Applications.txt", "data");
+        //checkandCreateFile("data/Applications.txt", "data");
+
         new FileService().copyDirectoryfromResources("public/", "WebPages");
 
         new LogService().logFileCreation();
         new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
-        //ApplicationService.addnew("BytePhil", "BytePhil#9293");
 
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
             final File newFile = new File("server.cfg");
             copyFile(newFile, "default.cfg");
         }
+
+        checkFolders();
 
         // Load config
         config = new ServerConfiguration("server.cfg");
@@ -66,8 +68,6 @@ public class Main {
         } else {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
-        File dir = new File("user");
-        if (!dir.exists()) dir.mkdirs();
 
         Console.sendBanner();
 
@@ -76,14 +76,15 @@ public class Main {
             Console.empty();
             Console.printout("Test Mode active! To disable, delete the file \"testing.xyz\" from the folder!", MessageType.WARNING);
             Console.empty();
+
+            new Test().testMethod();
         }
 
         // TEST
 
-       // new AccountManager().createAccount("BytePhil", "phitho2018@gmail.com", "Collins");
+       //
 
         // TEST
-        //new AccountManager().createAccount("BytePhil", "BytePhil", "phitho2018@gmail.com", "Collins");
         startApp();
     }
 
@@ -118,8 +119,6 @@ public class Main {
 
 
         Main.app = app;
-       // thread = UpdateThread.thread;
-        // thread.start();
 
         app.ws("/checklogin", ws -> {
             ws.onConnect(ctx -> {
@@ -206,6 +205,13 @@ public class Main {
         app.get("/registration", ctx -> {
             ctx.render("/public/registration.html");
         });
+    }
+
+    public void checkFolders() {
+        File dir = new File("data/user");
+        if (!dir.exists()) dir.mkdirs();
+        dir = new File("data/apply");
+        if (!dir.exists()) dir.mkdirs();
     }
 
     public void copyFile(File newFile, String existingFile) throws IOException {

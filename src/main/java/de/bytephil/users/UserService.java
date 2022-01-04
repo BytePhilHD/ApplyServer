@@ -16,6 +16,7 @@ import java.util.Objects;
 public class UserService {
 
     private final List<User> users;
+    private String path = "data/user";
 
     public UserService() {
         this.users = new ArrayList<>();
@@ -46,7 +47,7 @@ public class UserService {
     }
 
     public void loadAll() {
-        loadAll(new File("user"));
+        loadAll(new File(path));
     }
 
     public void loadAll(File space) {
@@ -82,7 +83,7 @@ public class UserService {
     }
 
     public void updateAll() {
-        updateAll(new File("user"));
+        updateAll(new File(path));
     }
 
     public void updateAll(File space) {
