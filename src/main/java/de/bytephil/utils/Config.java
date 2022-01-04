@@ -19,6 +19,8 @@ public class Config {
 
     public String emailhost;
     public int emailport;
+    public String emailSecureMethod;
+    public String emailDisplayName;
     public String emailuser;
     public String emailpassword;
 }
