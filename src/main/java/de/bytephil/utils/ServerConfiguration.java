@@ -42,6 +42,8 @@ public class ServerConfiguration extends Config {
         // EMAIL
         emailhost = prop.getProperty("email.smtp.host", "smtp.gmail.com");
         emailport = Integer.parseInt(prop.getProperty("email.smtp.port", "465"));
+        emailSecureMethod = prop.getProperty("email.smtp.secure.method", "STARTTLS");
+        emailDisplayName = prop.getProperty("email.smtp.displayname", "");
         emailuser = prop.getProperty("email.smtp.user", "testuser@gmail.com");
         emailpassword = prop.getProperty("email.smtp.password", "yourPassword");
     }
