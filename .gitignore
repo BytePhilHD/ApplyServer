@@ -1,3 +1,7 @@
 out
 target
 .idea
+WebPages
+logs
+data
+server.cfg
