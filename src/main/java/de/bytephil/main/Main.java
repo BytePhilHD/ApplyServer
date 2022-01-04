@@ -4,6 +4,8 @@ import de.bytephil.enums.MessageType;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
+import de.bytephil.users.Application;
+import de.bytephil.users.ApplicationService;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
@@ -16,6 +18,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -199,6 +202,15 @@ public class Main {
             ws.onMessage(ctx -> {
                 String message = ctx.message();
                 WebSocketHandler.createApplication(message);
+            });
+        });
+        app.ws("/data", ws -> {
+            ws.onMessage(ctx -> {
+                List<Application> applications = new ApplicationService().applications;
+                for (int i = 0; i <= applications.size(); i++) {
+                    Application application = applications.get(i);
+                    ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
+                }
             });
         });
         app.get("/login", ctx -> {

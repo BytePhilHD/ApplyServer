@@ -1,7 +1,6 @@
 package de.bytephil.users;
 
 import de.bytephil.enums.MessageType;
-import de.bytephil.users.Application;
 import de.bytephil.utils.Console;
 import de.bytephil.utils.PasswordGenerator;
 import org.json.JSONObject;
@@ -16,11 +15,11 @@ import java.util.Objects;
 
 public class ApplicationService {
 
-    private final List<Application> Applications;
+    public final List<Application> applications;
     private String path = "data/apply";
 
     public ApplicationService() {
-        this.Applications = new ArrayList<>();
+        this.applications = new ArrayList<>();
         loadAll();
     }
 
@@ -37,13 +36,13 @@ public class ApplicationService {
     }
 
     public void saveApplication(Application Application) {
-        for (int i = 0; i < Applications.size(); i++) {
-            if (Applications.get(i).getName().equals(Application.getName())) {
-                Applications.set(i, Application);
+        for (int i = 0; i < applications.size(); i++) {
+            if (applications.get(i).getName().equals(Application.getName())) {
+                applications.set(i, Application);
                 return;
             }
         }
-        Applications.add(Application);
+        applications.add(Application);
         updateAll();
     }
 
@@ -63,7 +62,7 @@ public class ApplicationService {
                 final Application Application = new Application(name, jsonApplication.getString("name"), jsonApplication.getString("email"), jsonApplication.getString("job"), jsonApplication.getString("application"));
 
                 if (!Application.getName().contains("%") && !Application.getName().contains("#") && !Application.getName().contains("'"))
-                    Applications.add(Application);
+                    applications.add(Application);
                 else
                     Console.printout("Error at ApplicationService!", MessageType.ERROR);
             }
@@ -72,15 +71,15 @@ public class ApplicationService {
 
 
     public Application getApplicationByName(String name) {
-        return Applications.stream().filter(Application -> Application.getName().equals(name)).findFirst().orElse(null);
+        return applications.stream().filter(Application -> Application.getName().equals(name)).findFirst().orElse(null);
     }
 
     public Application getApplicationByEmail(String email) {
-        return Applications.stream().filter(Application -> Application.getEmail().equals(email)).findFirst().orElse(null);
+        return applications.stream().filter(Application -> Application.getEmail().equals(email)).findFirst().orElse(null);
     }
 
     public boolean existsApplication(String id) {
-        return Applications.stream().anyMatch(Application -> Application.getId().equals(id));
+        return applications.stream().anyMatch(Application -> Application.getId().equals(id));
     }
 
     public void updateAll() {
@@ -88,7 +87,7 @@ public class ApplicationService {
     }
 
     public void updateAll(File space) {
-        Applications.forEach(Application -> {
+        applications.forEach(Application -> {
             final File file = new File(space.getPath() + "/" + Application.getId() + ".json");
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", Application.getName());
@@ -97,6 +96,13 @@ public class ApplicationService {
             jsonObject.put("application", Application.getApplication());
             save(file, jsonObject);
         });
+    }
+
+    public void convertApplications() {
+        for (int i = 0; i <= applications.size(); i++) {
+            Application application = applications.get(i);
+
+        }
     }
 
     public JSONObject load(File file) {
