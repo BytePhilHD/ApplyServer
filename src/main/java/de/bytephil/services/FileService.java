@@ -1,6 +1,8 @@
 package de.bytephil.services;
 
+import de.bytephil.enums.MessageType;
 import de.bytephil.main.Main;
+import de.bytephil.utils.Console;
 
 import java.io.*;
 import java.net.URI;
@@ -19,7 +21,15 @@ public class FileService {
         if (new File(destinationDirectoryLocation).exists() && !Main.getInstance().testing) {
             return;
         }
-        try {
+        if (Main.getInstance().testing) {
+            try {
+                deleteDirectory(new File("WebPages"));
+            } catch (Exception e1) {
+                Console.printout("Error whilst trying to delete existing folder!", MessageType.ERROR);
+                return;
+            }
+        }
+            try {
             JarFile jar = new JarFile(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()));
             final Enumeration<JarEntry> entries = jar.entries();
             final String newpath = resourcesName;
@@ -64,6 +74,15 @@ public class FileService {
         }
         input.close();
         os.close();
+    }
+    private boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
     }
 
 }

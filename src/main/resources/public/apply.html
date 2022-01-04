@@ -28,7 +28,7 @@
     </nav>
     <div class="contact-clean" style="background-color: rgb(49,76,98);height: 908px;padding: 218px;"><form method="post" style="height: 594px;background-color: #edfdfe;width: 659px;">
     <h2 class="text-center">Application</h2>
-    <div class="form-group"><input id="name" type="text" class="form-control" name="name" placeholder="Name" /></div><input id="email" type="email" class="form-control is-invalid" name="email" placeholder="Email" /><small class="form-text text-danger">Please enter a correct email address.</small><input
+    <div class="form-group"><input id="name" type="text" class="form-control" name="name" placeholder="Name" /></div><input id="email" type="email" class="form-control" name="email" placeholder="Email" /><span style="height: -42px;font-size: -116px;opacity: 0;width: -50px;margin: 0;padding: 0;font-family: Cabin, sans-serif;">aaa</span><input
         id="job" type="text" class="form-control" name="job" placeholder="Job" /><span style="height: -42px;font-size: -116px;opacity: 0;width: -50px;margin: 0;padding: 0;font-family: Cabin, sans-serif;">aaa</span>
     <div class="form-group"><textarea id="applicationtext" class="form-control" name="applicationtext" placeholder="Application" rows="50" style="height: 217px;"></textarea></div>
     <div class="form-group"><button onclick="manageInput()" class="btn btn-primary" type="submit">send </button></div>
@@ -60,7 +60,12 @@
                 let email = document.getElementById("email").value;
                 let job = document.getElementById("job").value;
                 let applicationtext = document.getElementById("applicationtext").value;
-                ws.send(name + "|*|" + email + "|'|" + job + "|~|" + applicationtext);          // "|*|" is placeholder between email and password, so Login.java can detect those
+                if (name != null && email != null && job != null && applicationtext != null) {
+                    ws.send(name + "|*|" + email + "|'|" + job + "|~|" + applicationtext);          // "|*|" is placeholder between email and password, so Login.java can detect those
+                    window.location.href = location.protocol + "login?wrongpw"
+                } else {
+
+                }
             }
 
             function setupWebSocket() {
@@ -78,15 +83,6 @@
                 }
                 ws.onerror = errorEvent => {
                     console.log('Server Error!');
-                }
-                ws.onmessage = messageEvent => {
-                    var wsinput = messageEvent.data;
-                    if (wsinput.includes("SUCCESS")) {
-
-
-                    } else if (wsinput.includes("WRONG")) {
-                        window.location.href = location.protocol + "login?wrongpw"
-                    }
                 }
             }
 

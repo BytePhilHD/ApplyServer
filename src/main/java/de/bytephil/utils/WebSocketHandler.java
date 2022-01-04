@@ -40,8 +40,9 @@ public class WebSocketHandler {
             job = webSocketAnswer.substring(iend1+3, iend2);
             applicationtext = webSocketAnswer.substring(iend2+3, length);
         }
-        System.out.println("Neue Application: " + name + ", " + email + ", " + job + ", " + applicationtext);
-        //new AccountManager().createAccount(user, email, pw);
+        if (name == null) {
+            return;
+        }
         Application application = new Application(name, email, job, applicationtext);
         new ApplicationService().createApplication(application);
     }

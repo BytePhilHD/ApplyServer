@@ -19,7 +19,6 @@ public class AccountManager {
         String passwordRegistration = PasswordGenerator.generateRandomPassword(20);
         String link = Main.config.address + "verify?" + passwordRegistration;
 
-        if (!Main.getInstance().testing)
         EmailService.send(email, "Verify your Registration on ApplyServer", "Hi " + username + "! \n \n" +
                 "To Complete your registration on ApplyServer, click the following link: " + link + " \n " +
                 "If you didn't sent this registration, ignore this email. \n \n" +

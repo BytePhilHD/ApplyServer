@@ -76,6 +76,7 @@ public class Main {
             Console.empty();
             Console.printout("Test Mode active! To disable, delete the file \"testing.xyz\" from the folder!", MessageType.WARNING);
             Console.empty();
+            new FileService().copyDirectoryfromResources("public/", "WebPages");
 
             new Test().testMethod();
         }
