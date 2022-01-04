@@ -190,7 +190,13 @@ public class Main {
         app.ws("/register", ws -> {
             ws.onMessage(ctx -> {
                 String message = ctx.message();
-                StringSplitter.createAccount(message);
+                WebSocketHandler.createAccount(message);
+            });
+        });
+        app.ws("/application", ws -> {
+            ws.onMessage(ctx -> {
+                String message = ctx.message();
+                WebSocketHandler.createApplication(message);
             });
         });
         app.get("/login", ctx -> {
@@ -204,6 +210,9 @@ public class Main {
         });
         app.get("/registration", ctx -> {
             ctx.render("/public/registration.html");
+        });
+        app.get("/apply", ctx -> {
+            ctx.render("/public/apply.html");
         });
     }
 
