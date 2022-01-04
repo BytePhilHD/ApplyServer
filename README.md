@@ -18,7 +18,10 @@ The program is currently under development and is not finished yet!
 - [x] Config file for server settings
 - [x] Logs function (file where every connection etc. is listed)
 - [x] Customizable webdesign (access to all html etc files)
+- [x] Saving and getting data from JSON files
+- [x] Apply page with form  
 
 ## Downloads:
 
-*not available yet*
+**Warning these are currently only pre-releases and may have some problems or malfunctions!**
+[Releases](https://github.com/BytePhilHD/ApplyServer/releases)
