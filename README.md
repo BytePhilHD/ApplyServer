@@ -6,8 +6,7 @@ The program is currently under development and is not finished yet!
 
 ## Todo List
 
-- [ ] Make Home page and apply page functional
-- [ ] Saving data to MySQL server / JSON Files
+- [ ] Make Home page functional
 - [ ] Improve webdesign
 - [ ] Improve security
 

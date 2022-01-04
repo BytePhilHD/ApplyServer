@@ -22,7 +22,6 @@ import java.util.List;
 
 public class Main {
 
-
     private static Javalin app;
     private static java.lang.Thread thread;
 
@@ -85,9 +84,7 @@ public class Main {
         }
 
         // TEST
-
-       //
-
+        //
         // TEST
         startApp();
     }
