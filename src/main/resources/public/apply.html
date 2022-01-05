@@ -26,13 +26,12 @@
     <nav class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container"><a class="navbar-brand js-scroll-trigger" href="#">Apply-Server</a><button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button></div>
     </nav>
-    <div class="contact-clean" style="background-color: rgb(49,76,98);height: 908px;padding: 218px;"><form style="height: 594px;background-color: #edfdfe;width: 659px;">
+    <div class="contact-clean" style="background-color: rgb(49,76,98);height: 908px;padding: 218px;">
     <h2 class="text-center">Application</h2>
     <div class="form-group"><input id="name" type="text" class="form-control" name="name" placeholder="Name" /></div><input id="email" type="email" class="form-control" name="email" placeholder="Email" /><span style="height: -42px;font-size: -116px;opacity: 0;width: -50px;margin: 0;padding: 0;font-family: Cabin, sans-serif;">aaa</span><input
         id="job" type="text" class="form-control" name="job" placeholder="Job" /><span style="height: -42px;font-size: -116px;opacity: 0;width: -50px;margin: 0;padding: 0;font-family: Cabin, sans-serif;">aaa</span>
     <div class="form-group"><textarea id="applicationtext" class="form-control" name="applicationtext" placeholder="Application" rows="50" style="height: 217px;"></textarea></div>
-    <div class="form-group"><button onclick="manageInput()" class="btn btn-primary" type="submit">send </button></div>
-</form></div>
+    <div class="form-group"><button onclick="manageInput()" class="btn btn-primary" type="submit">send </button></div></div>
     <section id="contact" class="content-section text-center">
         <div class="container">
             <div class="row">
@@ -59,9 +58,13 @@
                 let name = document.getElementById("name").value;
                 let email = document.getElementById("email").value;
                 let job = document.getElementById("job").value;
-                let applicationtext = document.getElementById("applicationtext").value;
-                if (name != null && email != null && job != null && applicationtext != null) {
-                    ws.send(name + "|*|" + email + "|'|" + job + "|~|" + applicationtext);          // "|*|" is placeholder between email and password, so Login.java can detect those
+                let applicationText = document.getElementById("applicationtext").value;
+                if (name != null && email != null && job != null && applicationText != null) {
+                    document.getElementById("name").value = '';
+                    document.getElementById("email").value = '';
+                    document.getElementById("job").value = '';
+                    document.getElementById("applicationtext").value = '';
+                    ws.send(name + "|*|" + email + "|'|" + job + "|~|" + applicationText);          // "|*|" is placeholder between email and password, so Login.java can detect those
                 } else {
 
                 }
