@@ -6,16 +6,19 @@ import de.bytephil.users.User;
 import de.bytephil.users.UserService;
 import de.bytephil.utils.WebSocketHandler;
 
+import java.util.List;
+
 public class Test {
 
     public void testMethod() {
-        /*
-        final Application application = new Application("BytePhil", "phitho@gmail.com", "Dev", "Ich bin der Philipp und will mich bewerben!");
-        new ApplicationService().createApplication(application);
 
-        Application test = new ApplicationService().getApplicationByName("BytePhil");
-        System.out.println("Application: " + test.getName() + ", " + test.getEmail() + ", " + test.getJob() + ", " + test.getApplication());
-        */
-        //WebSocketHandler.createApplication("Byter|*|phitho2018@gmail.com|'|Developer|~|Hallo ich bins der echte");
+        System.out.println("Starting test method!");
+
+        List<Application> applications = new ApplicationService().applications;
+        for (int i = 0; i < applications.size(); i++) {
+            Application application = applications.get(i);
+            System.out.println(application.getName() + ", " + application.getEmail() + ", " + application.getJob());
+            //System.out.println(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
+        }
     }
 }

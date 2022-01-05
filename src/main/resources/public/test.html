@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let test = "Name|*|emailaddresse|'|job";
+
+    let iend = test.indexOf("|*|");
+    let iend1 = test.indexOf("|'|");
+    let length = test.length;
+    // The webSocketAnswer should look like this: "BytePhil|*|phitho2018@gmail.com|'|yourpw"
+    let user = null;
+    let email = null;
+    let job = null;
+    if (iend != -1)
+    {
+        user = test.substring(0, iend); //this will give abc
+        email = test.substring(iend+3, iend1); //this will give abc
+        job = test.substring(iend1+3, length);
+    }
+    console.log("User: " + user);
+    console.log("Email: " + email);
+    console.log("Job: " + job);
+</script>
+</body>
+</html>

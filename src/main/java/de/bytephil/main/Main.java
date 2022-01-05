@@ -163,6 +163,11 @@ public class Main {
                     if (logtIn.contains(message)) {
                         logtIn.add(ctx.getSessionId());
                         logtIn.remove(message);
+                        List<Application> applications = new ApplicationService().applications;
+                        for (int i = 0; i < applications.size(); i++) {
+                            Application application = applications.get(i);
+                            ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
+                        }
                     } else {
                         ctx.send("CLOSE");
                         new LogService().writetoFile(new File("logs/log.txt"), "Client disconnected with IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
@@ -203,11 +208,7 @@ public class Main {
         });
         app.ws("/data", ws -> {
             ws.onMessage(ctx -> {
-                List<Application> applications = new ApplicationService().applications;
-                for (int i = 0; i <= applications.size(); i++) {
-                    Application application = applications.get(i);
-                    ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
-                }
+
             });
         });
         app.get("/login", ctx -> {
@@ -224,6 +225,9 @@ public class Main {
         });
         app.get("/apply", ctx -> {
             ctx.render("/public/apply.html");
+        });
+        app.get("/test", ctx -> {
+            ctx.render("/public/test.html");
         });
     }
 
