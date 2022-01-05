@@ -164,7 +164,8 @@ public class Main {
                         logtIn.add(ctx.getSessionId());
                         logtIn.remove(message);
                         List<Application> applications = new ApplicationService().applications;
-                        for (int i = 0; i < applications.size(); i++) {
+                        //for (int i = 0; i < applications.size(); i++) {
+                        for (int i = 0; i < 3; i++) {                           // at the moment only 3 applications are shown in the home page
                             Application application = applications.get(i);
                             ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
                         }

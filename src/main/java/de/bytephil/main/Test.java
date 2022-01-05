@@ -12,6 +12,7 @@ public class Test {
 
     public void testMethod() {
 
+        /*
         System.out.println("Starting test method!");
 
         List<Application> applications = new ApplicationService().applications;
@@ -19,6 +20,9 @@ public class Test {
             Application application = applications.get(i);
             System.out.println(application.getName() + ", " + application.getEmail() + ", " + application.getJob());
             //System.out.println(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
-        }
+
+      }
+
+         */
     }
 }
