@@ -52,94 +52,7 @@
                 <h2 class="text-center" style="color: rgb(199,215,231);font-size: 44px;">Features </h2>
                 <p class="text-center" style="color: rgb(255,255,255);">These are three applications</p>
             </div>
-            <div class="row justify-content-center features">
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 50px; width: 50px;" src="assets/img/DSC06530.JPG"></div>
-                                <div class="media-body">
-                                    <ul class="list-unstyled fa-ul">
-                                        <li style="font-size: 20px;"><i class="fa fa-user fa-li"></i><a id="a1n">Application 1</a></li>
-                                        <li style="font-size: 18px;"><i class="fa fa-envelope fa-li"></i><a id="a1e" href="#">apply@gmail.com</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div><small>Affinity Score <i class="fa fa-info-circle text-info"></i></small>
-                                <div class="progress progress-high">
-                                    <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="sr-only">90%</span></div>
-                                </div>
-                            </div>
-                            <hr>
-                            <p id="a1j">Job</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 25px; width: 25px;" src="assets/img/avatar.jpg"></div>
-                                <div class="media-body"><a href="#"><small class="text-uppercase text-muted">Referred By:</small><br>
-                                    Alberto Gonzalez</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 50px; width: 50px;" src="assets/img/DSC06530.JPG"></div>
-                                <div class="media-body">
-                                    <ul class="list-unstyled fa-ul">
-                                        <li style="font-size: 20px;"><i class="fa fa-user fa-li"></i><a id="a2n">Application 1</a></li>
-                                        <li style="font-size: 18px;"><i class="fa fa-envelope fa-li"></i><a id="a2e" href="#">apply@gmail.com</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div><small>Affinity Score <i class="fa fa-info-circle text-info"></i></small>
-                                <div class="progress progress-high">
-                                    <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="sr-only">90%</span></div>
-                                </div>
-                            </div>
-                            <hr>
-                            <p id="a2j">Job</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 25px; width: 25px;" src="assets/img/avatar.jpg"></div>
-                                <div class="media-body"><a href="#"><small class="text-uppercase text-muted">Referred By:</small><br>
-                                    Alberto Gonzalez</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 50px; width: 50px;" src="assets/img/DSC06530.JPG"></div>
-                                <div class="media-body">
-                                    <ul class="list-unstyled fa-ul">
-                                        <li style="font-size: 20px;"><i class="fa fa-user fa-li"></i><a id="a3n">Application 1</a></li>
-                                        <li style="font-size: 18px;"><i class="fa fa-envelope fa-li"></i><a id="a3e" href="#">apply@gmail.com</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div><small>Affinity Score <i class="fa fa-info-circle text-info"></i></small>
-                                <div class="progress progress-high">
-                                    <div class="progress-bar bg-danger" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="sr-only">90%</span></div>
-                                </div>
-                            </div>
-                            <hr>
-                            <p id="a3j">Job</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="media">
-                                <div><img class="rounded-circle mr-3" style="height: 25px; width: 25px;" src="assets/img/avatar.jpg"></div>
-                                <div class="media-body"><a href="#"><small class="text-uppercase text-muted">Referred By:</small><br>
-                                    Alberto Gonzalez</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="applications" class="row justify-content-center features">
             </div>
         </div>
     </div>
@@ -162,6 +75,37 @@
     }
 
     function setupWebSocket() {
+
+        const applicationDefaultClasses = "col-sm-6 col-md-5 col-lg-4 item";
+        const applicationInnerHTML = "                    <div class=\"card\">\n" +
+            "                        <div class=\"card-body\">\n" +
+            "                            <div class=\"media\">\n" +
+            "                                <div><img class=\"rounded-circle mr-3\" style=\"height: 50px; width: 50px;\" src=\"assets/img/DSC06530.JPG\"></div>\n" +
+            "                                <div class=\"media-body\">\n" +
+            "                                    <ul class=\"list-unstyled fa-ul\">\n" +
+            "                                        <li style=\"font-size: 20px;\"><i class=\"fa fa-user fa-li\"></i><a class=\"name-user\">Application 1</a></li>\n" +
+            "                                        <li style=\"font-size: 18px;\"><i class=\"fa fa-envelope fa-li\"></i><a class=\"email-addr\" href=\"#\">apply@gmail.com</a></li>\n" +
+            "                                    </ul>\n" +
+            "                                </div>\n" +
+            "                            </div>\n" +
+            "                            <div><small>Affinity Score <i class=\"fa fa-info-circle text-info\"></i></small>\n" +
+            "                                <div class=\"progress progress-high\">\n" +
+            "                                    <div class=\"progress-bar bg-danger\" aria-valuenow=\"90\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 90%;\"><span class=\"sr-only\">90%</span></div>\n" +
+            "                                </div>\n" +
+            "                            </div>\n" +
+            "                            <hr>\n" +
+            "                            <p class=\"job\">Job</p>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"card-footer\">\n" +
+            "                            <div class=\"media\">\n" +
+            "                                <div><img class=\"rounded-circle mr-3\" style=\"height: 25px; width: 25px;\" src=\"assets/img/avatar.jpg\"></div>\n" +
+            "                                <div class=\"media-body\"><a href=\"#\"><small class=\"text-uppercase text-muted\">Referred By:</small><br>\n" +
+            "                                    Alberto Gonzalez</a></div>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                    </div>"
+
+        const applications = document.getElementById("applications");
         let i = 80;
         let wsc = 0;
         if (location.port != 0) {
@@ -180,7 +124,7 @@
             console.log("An error occurred!");
         }
         ws.onmessage = messageEvent => {
-            var wsinput = messageEvent.data;
+            let wsinput = messageEvent.data;
             if (wsinput.includes("CLOSE")) {
                 window.location.href = location.protocol + "login?renew";
             }
@@ -198,22 +142,16 @@
                     email = wsinput.substring(iend+3, iend1); //this will give abc
                     job = wsinput.substring(iend1+3, length);
                 }
-                if (wsc === 0) {
-                    document.getElementById('a1n').innerHTML = user;
-                    document.getElementById('a1e').innerHTML = email;
-                    document.getElementById('a1j').innerHTML = job;
-                    wsc++;
-                } else if (wsc === 1) {
-                    document.getElementById('a2n').innerHTML = user;
-                    document.getElementById('a2e').innerHTML = email;
-                    document.getElementById('a2j').innerHTML = job;
-                    wsc++;
-                } else if (wsc === 2) {
-                    document.getElementById('a3n').innerHTML = user;
-                    document.getElementById('a3e').innerHTML = email;
-                    document.getElementById('a3j').innerHTML = job;
-                    wsc++;
-                }
+
+                let newApplication = document.createElement("div");
+                newApplication.className = applicationDefaultClasses;
+                newApplication.innerHTML = applicationInnerHTML;
+                newApplication.getElementsByClassName("name-user")[0].innerText = user;
+                newApplication.getElementsByClassName("email-addr")[0].innerText = email;
+                newApplication.getElementsByClassName("job")[0].innerText = job;
+                applications.append(newApplication);
+
+                wsc++;
             }
         }
     }
