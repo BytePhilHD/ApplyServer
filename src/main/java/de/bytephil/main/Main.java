@@ -165,8 +165,7 @@ public class Main {
                         logtIn.remove(message);
                         List<Application> applications = new ApplicationService().applications;
                         //for (int i = 0; i < applications.size(); i++) {
-                        for (int i = 0; i < 3; i++) {                           // at the moment only 3 applications are shown in the home page
-                            Application application = applications.get(i);
+                        for (Application application : applications) {
                             ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
                         }
                     } else {
