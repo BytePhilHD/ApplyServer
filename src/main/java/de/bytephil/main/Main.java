@@ -196,8 +196,12 @@ public class Main {
         app.ws("/register", ws -> {
             ws.onMessage(ctx -> {
                 String message = ctx.message();
-                WebSocketHandler.createAccount(message);
-                ctx.send("SENT");
+                boolean alreadyExists = WebSocketHandler.createAccount(message);
+                if (!alreadyExists) {
+                    ctx.send("ALREADY");
+                } else {
+                    ctx.send("SENT");
+                }
             });
         });
         app.ws("/application", ws -> {

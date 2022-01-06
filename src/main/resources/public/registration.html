@@ -49,58 +49,60 @@
         </div>
     </div>
 
-        <script>
-            window.onload = setupWebSocket;
+    <script>
+        window.onload = setupWebSocket;
 
-            var input = document.getElementById("pw");
-            input.addEventListener("keyup", function (event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    manageInput();
-                }
-            });
+        var input = document.getElementById("pw");
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                manageInput();
+            }
+        });
 
-            let ws;
-            const test = true;
+        let ws;
+        const test = true;
 
-            function manageInput() {
-                let inpw = document.getElementById("pw").value;
-                let inuser = document.getElementById("username").value;
-                let inemail = document.getElementById("email").value;
-                document.getElementById('pw').value = '';
-                if (inpw !== "" && inuser !== "" && inemail !== "") {
-                    ws.send(inuser + "|*|" + inemail + "|'|" + inpw);          // "|*|" is placeholder between email and password, so Login.java can detect those
+        function manageInput() {
+            let inpw = document.getElementById("pw").value;
+            let inuser = document.getElementById("username").value;
+            let inemail = document.getElementById("email").value;
+            document.getElementById('pw').value = '';
+            if (inpw !== "" && inuser !== "" && inemail !== "") {
+                ws.send(inuser + "|*|" + inemail + "|'|" + inpw);          // "|*|" is placeholder between email and password, so Login.java can detect those
+            } else {
+                window.location.href = location.protocol + "registration?empty";
+            }
+        }
+
+        function setupWebSocket() {
+            let i = 80;
+            if (location.port != 0) {
+                i = location.port;
+            }
+            ws = new WebSocket("ws://" + location.hostname + ":" + i + "/register");
+
+            ws.onopen = openEvent => {
+                console.log('INFO - Connection to Server established!');
+            }
+            ws.onclose = closeEvent => {
+                setupWebSocket();
+            }
+            ws.onerror = errorEvent => {
+                console.log('Server Error!');
+            }
+            ws.onmessage = messageEvent => {
+                var wsinput = messageEvent.data;
+                if (wsinput.includes("SENT")) {
                     window.location.href = location.protocol + "login?registration";
-                } else {
-                    window.location.href = location.protocol + "registration?empty";
+                }
+                else if (wsinput.includes("ALREADY")) {
+                    document.getElementById("console").innerHTML = "That username already exists!";
                 }
             }
+        }
 
-            function setupWebSocket() {
-                let i = 80;
-                if (location.port != 0) {
-                    i = location.port;
-                }
-                ws = new WebSocket("ws://" + location.hostname + ":" + i + "/register");
-
-                ws.onopen = openEvent => {
-                    console.log('INFO - Connection to Server established!');
-                }
-                ws.onclose = closeEvent => {
-                    setupWebSocket();
-                }
-                ws.onerror = errorEvent => {
-                    console.log('Server Error!');
-                }
-                ws.onmessage = messageEvent => {
-                    var wsinput = messageEvent.data;
-                    if (wsinput.includes("SENT")) {
-                        window.location.href = location.protocol + "login?registration";
-                    }
-                }
-            }
-
-        </script>
+    </script>
 </div>
 <footer>
     <div class="container text-center">

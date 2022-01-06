@@ -107,7 +107,6 @@
 
         const applications = document.getElementById("applications");
         let i = 80;
-        let wsc = 0;
         if (location.port != 0) {
             i = location.port;
         }
@@ -150,8 +149,6 @@
                 newApplication.getElementsByClassName("email-addr")[0].innerText = email;
                 newApplication.getElementsByClassName("job")[0].innerText = job;
                 applications.append(newApplication);
-
-                wsc++;
             }
         }
     }

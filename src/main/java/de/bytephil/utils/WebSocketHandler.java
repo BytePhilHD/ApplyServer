@@ -3,10 +3,11 @@ package de.bytephil.utils;
 import de.bytephil.main.Main;
 import de.bytephil.users.Application;
 import de.bytephil.users.ApplicationService;
+import de.bytephil.users.UserService;
 
 public class WebSocketHandler {
 
-    public static void createAccount(String webSocketAnswer) {
+    public static boolean createAccount(String webSocketAnswer) {
         int iend = webSocketAnswer.indexOf("|*|");
         int iend1 = webSocketAnswer.indexOf("|'|");
         int length = webSocketAnswer.length();
@@ -20,7 +21,12 @@ public class WebSocketHandler {
             email = webSocketAnswer.substring(iend+3, iend1); //this will give abc
             hashedPW = BCrypt.hashpw(webSocketAnswer.substring(iend1+3, length), BCrypt.gensalt(12));
         }
-        new AccountManager().createAccount(user, email, hashedPW);
+        if (new UserService().getUserByName(user) != null) {
+            return false;
+        } else {
+            new AccountManager().createAccount(user, email, hashedPW);
+            return true;
+        }
     }
 
     public static void createApplication(String webSocketAnswer) {

@@ -8,7 +8,6 @@ The program is currently under development and is not finished yet!
 
 - [ ] Make Home page functional
 - [ ] Improve webdesign
-- [ ] Improve security
 
 ## Feature List
 
