@@ -16,7 +16,7 @@ The program is currently under development and is not finished yet!
 - [x] Secured home page (can't access without logging in before)
 - [x] Config file for server settings
 - [x] Logs function (file where every connection etc. is listed)
-- [x] Customizable webdesign (access to all html etc files)
+- [x] Customizable webdesign (access to all html etc. files)
 - [x] Saving and getting data from JSON files
 - [x] Apply page with form  
 

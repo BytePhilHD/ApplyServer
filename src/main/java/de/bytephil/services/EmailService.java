@@ -1,8 +1,11 @@
 package de.bytephil.services;
 
+import de.bytephil.enums.MessageType;
 import de.bytephil.main.Main;
+import de.bytephil.utils.Console;
 import de.bytephil.utils.ServerConfiguration;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import javax.mail.*;
@@ -26,12 +29,18 @@ public class EmailService {
         props.put("mail.smtp.auth", "true");
 
         //get Session
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(configuration.emailuser,configuration.emailpassword);
-                    }
-                });
+        Session session = null;
+        try {
+             session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(configuration.emailuser,configuration.emailpassword);
+                        }
+                    });
+        } catch (Exception e1) {
+            Console.printout("Please check your email credentials! Something went wrong there!", MessageType.ERROR);
+            return;
+        }
         //compose message
         try {
             MimeMessage message = new MimeMessage(session);
@@ -45,8 +54,8 @@ public class EmailService {
             message.setText(msg);
             //send message
             Transport.send(message);
-        } catch (MessagingException e) {throw new RuntimeException(e);} catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            Console.printout("Please check your email credentials! Something went wrong there!", MessageType.ERROR);
         }
 
     }

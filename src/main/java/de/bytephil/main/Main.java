@@ -230,9 +230,6 @@ public class Main {
         app.get("/apply", ctx -> {
             ctx.render("/public/apply.html");
         });
-        app.get("/test", ctx -> {
-            ctx.render("/public/test.html");
-        });
     }
 
     public void checkFolders() {

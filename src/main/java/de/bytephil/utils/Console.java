@@ -15,7 +15,13 @@ public class Console {
         if (type == MessageType.DEBUG && !Main.getInstance().debugMSG) {
             return;
         }
-        System.out.println("[" + getTime() + "] " + type + " - " + message);
+        if (type == MessageType.ERROR) {
+            System.out.println("[" + getTime() + "] " + type + " - ");
+            System.out.println("[" + getTime() + "] " + type + " - " + message);
+            System.out.println("[" + getTime() + "] " + type + " - ");
+        } else {
+            System.out.println("[" + getTime() + "] " + type + " - " + message);
+        }
         try {
             new LogService().writetoFile(new File("logs/log.txt"), message, type);
         } catch (IOException e1) {}
