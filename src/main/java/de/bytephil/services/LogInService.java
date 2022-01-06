@@ -3,6 +3,7 @@ package de.bytephil.services;
 import de.bytephil.main.Main;
 import de.bytephil.users.User;
 import de.bytephil.users.UserService;
+import de.bytephil.utils.BCrypt;
 
 public class LogInService {
 
@@ -22,7 +23,7 @@ public class LogInService {
             User user = new UserService().getUserByName(username);
             String passwordUser = user.getPassword();
 
-            if (password.equalsIgnoreCase(passwordUser)) {
+            if (BCrypt.checkpw(password, passwordUser)) {
                 return true;
             }
         } catch (Exception e1) {
@@ -30,7 +31,7 @@ public class LogInService {
                 User user = new UserService().getUserByEmail(username);
                 String passwordUser = user.getPassword();
 
-                if (password.equalsIgnoreCase(passwordUser)) {
+                if (BCrypt.checkpw(password, passwordUser)) {
                     return true;
                 }
             } catch (Exception e2) {}

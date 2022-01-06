@@ -12,15 +12,15 @@ public class WebSocketHandler {
         int length = webSocketAnswer.length();
                                                                                                      // The webSocketAnswer should look like this: "BytePhil|*|phitho2018@gmail.com|'|yourpw"
         String email = null;
-        String pw = null;
+        String hashedPW = null;
         String user = null;
         if (iend != -1)
         {
             user = webSocketAnswer.substring(0, iend); //this will give abc
             email = webSocketAnswer.substring(iend+3, iend1); //this will give abc
-            pw = webSocketAnswer.substring(iend1+3, length);
+            hashedPW = BCrypt.hashpw(webSocketAnswer.substring(iend1+3, length), BCrypt.gensalt(12));
         }
-        new AccountManager().createAccount(user, email, pw);
+        new AccountManager().createAccount(user, email, hashedPW);
     }
 
     public static void createApplication(String webSocketAnswer) {
