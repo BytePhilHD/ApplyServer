@@ -40,7 +40,7 @@ public class Main {
     private static ArrayList<String> logtIn = new ArrayList<>();
 
     public static ServerConfiguration config;
-    public final String version = "0.0.2";
+    public final String version = "0.0.3";
     public boolean debugMSG = false;
     public boolean testing = false;
 

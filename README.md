@@ -19,8 +19,15 @@ The program is currently under development and is not finished yet!
 - [x] Customizable webdesign (access to all html etc. files)
 - [x] Saving and getting data from JSON files
 - [x] Apply page with form  
+- [x] Encrypted password saving
 
 ## Downloads:
 
 **Warning these are currently only pre-releases and may have some problems or malfunctions!**
 [Releases](https://github.com/BytePhilHD/ApplyServer/releases)
+
+## Contributors:
+@BytePhilHD
+@Chrisimx
+
+
