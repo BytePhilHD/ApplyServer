@@ -52,13 +52,17 @@ public class Main {
         new LogService().logFileCreation();
         new LogService().writetoFile(new File("logs/log.txt"), "The program is trying to start...", MessageType.INFO);
 
+        Console.sendBanner();
+
         if (!new File("server.cfg").exists()) {
             de.bytephil.utils.Console.printout("The config file is missing! Creating default one.", MessageType.WARNING);
             final File newFile = new File("server.cfg");
             copyFile(newFile, "default.cfg");
+            firstStart();
         }
 
         checkFolders();
+        checkFiles();
 
         // Load config
         config = new ServerConfiguration("server.cfg");
@@ -71,8 +75,6 @@ public class Main {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
 
-        Console.sendBanner();
-
         if (new File("testing.xyz").exists()) {
             testing = true;
             Console.empty();
@@ -82,6 +84,7 @@ public class Main {
 
             new Test().testMethod();
         }
+
 
         // TEST
         //
@@ -239,6 +242,17 @@ public class Main {
         if (!dir.exists()) dir.mkdirs();
     }
 
+    public void checkFiles() {
+
+    }
+
+    public void firstStart() {
+        Console.empty(); Console.empty();
+        Console.printout("Hi, this seems to be your first start! In your folder there should be some new files and folders!", MessageType.INFO);
+        Console.printout("Please make sure to edit the server.cfg file to your needs, otherwise the program will not work correctly!", MessageType.INFO);
+        Console.printout("If you still have problems, make sure to check out my GitHub page! https://github.com/BytePhilHD", MessageType.INFO);
+    }
+
     public void copyFile(File newFile, String existingFile) throws IOException {
         newFile.createNewFile();
         final FileOutputStream configOutputStream = new FileOutputStream(newFile);
@@ -251,14 +265,6 @@ public class Main {
         defaultConfStream.close();
     }
 
-    public static void checkandCreateFile(String path, String folder) throws IOException {
-        if (!new File(path).exists()) {
-            File dir = new File(folder);
-            if (!dir.exists()) dir.mkdirs();
-            final File newFile = new File(path);
-            newFile.createNewFile();
-        }
-    }
 
     private SslContextFactory getSslContextFactory() {
         SslContextFactory sslContextFactory = new SslContextFactory();
