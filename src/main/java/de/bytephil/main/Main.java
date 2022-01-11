@@ -30,6 +30,7 @@ public class Main {
     public static Main getInstance() {
         return instance;
     }
+
     public Main() {
         instance = this;
     }
@@ -40,7 +41,7 @@ public class Main {
     private static ArrayList<String> logtIn = new ArrayList<>();
 
     public static ServerConfiguration config;
-    public final String version = "0.0.3";
+    public final String version = "0.0.4";
     public boolean debugMSG = false;
     public boolean testing = false;
 
@@ -190,8 +191,7 @@ public class Main {
                 String message = ctx.message().replace("?", "");
                 if (AccountManager.checkVerify(message)) {
                     ctx.send("VERIFIED");
-                }
-                else {
+                } else {
                     ctx.send("WRONG");
                 }
             });
@@ -247,10 +247,18 @@ public class Main {
     }
 
     public void firstStart() {
-        Console.empty(); Console.empty();
+        Console.empty();
+        Console.empty();
         Console.printout("Hi, this seems to be your first start! In your folder there should be some new files and folders!", MessageType.INFO);
         Console.printout("Please make sure to edit the server.cfg file to your needs, otherwise the program will not work correctly!", MessageType.INFO);
         Console.printout("If you still have problems, make sure to check out my GitHub page! https://github.com/BytePhilHD", MessageType.INFO);
+        Console.empty();
+        Console.printout("The App is starting soon!", MessageType.INFO);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e1) {
+        }
+
     }
 
     public void copyFile(File newFile, String existingFile) throws IOException {
