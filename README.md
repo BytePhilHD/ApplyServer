@@ -7,7 +7,10 @@ The program is currently under development and is not finished yet!
 ## Todo List
 
 - [ ] Make Home page functional
-- [ ] Improve webdesign
+- [ ] Account Manager (all accounts listed, add users to team)
+- [ ] Page for team to create application formula
+- [ ] Update Apply page 
+- [ ] Fix SSL problems (not working correctly)
 
 ## Feature List
 
