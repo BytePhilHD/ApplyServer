@@ -23,12 +23,13 @@
            href="#" style="width: 0;">Apply-Server</a></div>
 </nav>
 <div class="login-dark" style="height: 1240px;">
-    <div class="login-group">
+    <form method="post">
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration" style="height: 154px;"><i class="icon ion-ios-locked-outline"
                                                             style="height: 0px;"></i></div>
         <p class="text-center" style="height: 16px;">Log in to your Apply-Server Account</p>
-        <div class="form-group"><input id="email" type="email" class="form-control" name="email" placeholder="Email or Username"/>
+        <div class="form-group"><input id="email" type="email" class="form-control" name="email"
+                                       placeholder="Email or Username"/>
         </div>
         <div class="form-group"><input id="pw" type="password" class="form-control" name="password"
                                        placeholder="Password"/></div>
@@ -37,7 +38,7 @@
         <div class="form-group">
             <button onclick="manageInput()" class="btn btn-primary btn-block" type="submit">Log In</button>
         </div>
-        <a class="forgot" href="./registration">Forgot your email or password?</a></div>
+        <a class="forgot" href="./registration">Forgot your email or password?</a></form>
 
     <script>
         window.onload = setupWebSocket;
@@ -73,14 +74,16 @@
                 } else if (location.search.includes("renew")) {
                     document.getElementById("console").innerHTML = "Please log in again!";
                     document.getElementById("console").value = "Please log in again!";
-                } else if (location.search.includes("registration")) {
-                    document.getElementById("console").innerHTML = "Please check your email!";
-                    document.getElementById("console").value = "Please check your email!";
                 } else {
                     window.location.href = location.protocol + "/login";
                 }
             }
-            ws = new WebSocket("ws://" + location.hostname + ":" + i + "/checklogin");
+            if (location.protocol === "http:") {
+                ws = new WebSocket("ws://" + location.hostname + ":" + i + "/checklogin");
+            } else if (location.protocol === "https:") {
+                ws = new WebSocket("wss://" + location.hostname + ":" + 443 + "/checklogin");
+            }
+
 
             ws.onopen = openEvent => {
                 console.log('INFO - Connection to Server established!');

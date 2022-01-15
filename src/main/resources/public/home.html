@@ -110,10 +110,15 @@
         if (location.port != 0) {
             i = location.port;
         }
-        ws = new WebSocket("ws://" + location.host.replace("home", "") + "/login");
+        if (location.protocol === "http:") {
+            ws = new WebSocket("ws://" + location.host.replace("home", "") + "/login");
+        } else if (location.protocol === "https:") {
+            ws = new WebSocket("wss://" + location.hostname  + ":" + 443 + "/login");
+        }
 
         ws.onopen = openEvent => {
             ws.send("LOGIN: " + location.search);
+            console.log("INFO: Connection to server established!");
         }
         ws.onclose = closeEvent => {
             setupWebSocket();

@@ -9,8 +9,7 @@ The program is currently under development and is not finished yet!
 - [ ] Make Home page functional
 - [ ] Account Manager (all accounts listed, add users to team)
 - [ ] Page for team to create application formula
-- [ ] Update Apply page 
-- [ ] Fix SSL problems (Websockets are not connecting over https)
+- [ ] Update Apply page
 
 ## Feature List
 

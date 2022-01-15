@@ -75,7 +75,11 @@
                 if (location.port != 0) {
                     i = location.port;
                 }
-                ws = new WebSocket("ws://" + location.hostname + ":" + i + "/application");
+                if (location.protocol === "http:") {
+                    ws = new WebSocket("ws://" + location.hostname + ":" + i + "/application");
+                } else if (location.protocol === "https:") {
+                    ws = new WebSocket("wss://" + location.hostname + ":" + 443 + "/application");
+                }
 
                 ws.onopen = openEvent => {
                     console.log('INFO - Connection to Server established!');

@@ -77,6 +77,7 @@ public class Main {
         }
 
         if (new File("testing.xyz").exists()) {
+            debugMSG = true;
             testing = true;
             Console.empty();
             Console.printout("Test Mode active! To disable, delete the file \"testing.xyz\" from the folder!", MessageType.WARNING);
