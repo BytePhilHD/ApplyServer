@@ -23,7 +23,6 @@ import java.util.List;
 public class Main {
 
     private static Javalin app;
-    private static java.lang.Thread thread;
 
     private static Main instance;
 
@@ -41,7 +40,7 @@ public class Main {
     private static ArrayList<String> logtIn = new ArrayList<>();
 
     public static ServerConfiguration config;
-    public final String version = "0.0.4";
+    public final String version = "0.0.5";
     public boolean debugMSG = false;
     public boolean testing = false;
 
@@ -63,7 +62,6 @@ public class Main {
         }
 
         checkFolders();
-        checkFiles();
 
         // Load config
         config = new ServerConfiguration("server.cfg");
@@ -76,7 +74,7 @@ public class Main {
             Console.printout("Config not loaded! Using default.", MessageType.WARNING);
         }
 
-        if (new File("testing.xyz").exists()) {
+        if (new File("testing.xyz").exists()) {                                 // If file "testing.xyz" exists the test mode gets activated
             debugMSG = true;
             testing = true;
             Console.empty();
@@ -122,7 +120,6 @@ public class Main {
         if (debugMSG) {
             Console.printout("Debug Messages Enabled! To turn off, change \"debugMSG=true\" to \"debugMSG=false\" in your server.cfg!", MessageType.WARNING);
         }
-
 
         Main.app = app;
 

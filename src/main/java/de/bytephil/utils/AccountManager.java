@@ -1,6 +1,7 @@
 package de.bytephil.utils;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.enums.Rank;
 import de.bytephil.main.Main;
 import de.bytephil.services.EmailService;
 import de.bytephil.users.User;
@@ -38,7 +39,7 @@ public class AccountManager {
             String email = userRegistrationEmail.get(registrationKey);
             Console.printout("New Account verified: " + username + " with password " + password + " and email " + email, MessageType.INFO);
 
-            User user = new User(username, password, email);
+            User user = new User(username, password, email, Rank.USER);
             new UserService().createUser(user);
 
             userRegistration.remove(registrationKey);

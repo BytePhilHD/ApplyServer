@@ -59,7 +59,7 @@ public class UserService {
             if (name.contains("%") || name.contains("#") || name.contains("'")) {
                 Console.printout("Error whilst trying to read users!", MessageType.ERROR);
             } else {
-                final User user = new User(name, jsonUser.getString("name"), jsonUser.getString("password"), jsonUser.getString("email"));
+                final User user = new User(name, jsonUser.getString("name"), jsonUser.getString("password"), jsonUser.getString("email"), jsonUser.getString("rank"));
 
                 if (!user.getName().contains("%") && !user.getName().contains("#") && !user.getName().contains("'"))
                     users.add(user);
@@ -93,6 +93,7 @@ public class UserService {
             jsonObject.put("name", user.getName());
             jsonObject.put("password", user.getPassword());
             jsonObject.put("email", user.getEmail());
+            jsonObject.put("rank", user.getRank());
             save(file, jsonObject);
         });
     }
