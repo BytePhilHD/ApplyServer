@@ -275,7 +275,7 @@ public class Main {
 
 
     private SslContextFactory getSslContextFactory() {
-        SslContextFactory sslContextFactory = new SslContextFactory();
+        SslContextFactory sslContextFactory = new SslContextFactory.Server();
         sslContextFactory.setKeyStorePath(config.keystorePath);
         sslContextFactory.setKeyStorePassword(config.keystorePW);
         return sslContextFactory;
