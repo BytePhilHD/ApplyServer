@@ -82,9 +82,8 @@ public class Main {
             Console.empty();
             new FileService().copyDirectoryfromResources("public/", "WebPages");
 
-            new Test().testMethod();
+            //new Test().testMethod();
         }
-
 
         // TEST
         //
@@ -153,6 +152,7 @@ public class Main {
         app.ws("/login", ws -> {
             ws.onConnect(ctx -> {
                 Console.printout("[/login] Client connected with Session-ID: " + ctx.getSessionId() + " IP: " + ctx.session.getRemoteAddress(), MessageType.DEBUG);
+                //ctx.send("IN*FO" + );
             });
             ws.onClose(ctx -> {
                 Console.printout("[/login] Client disconnected (Session-ID: " + ctx.getSessionId() + ")", MessageType.DEBUG);
@@ -238,10 +238,6 @@ public class Main {
         if (!dir.exists()) dir.mkdirs();
         dir = new File("data/apply");
         if (!dir.exists()) dir.mkdirs();
-    }
-
-    public void checkFiles() {
-
     }
 
     public void firstStart() {

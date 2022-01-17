@@ -47,7 +47,7 @@ public class Console {
         System.out.println(" ");
     }
 
-    public static void reader() {
+    public void reader() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String input = null;
