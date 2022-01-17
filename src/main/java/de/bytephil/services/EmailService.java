@@ -69,9 +69,7 @@ public class EmailService {
     //  EmailService.send(config.emailuser, config.emailpassword, "phitho2018@gmail.com", "Hallo", "Hallo du");
 
     private static boolean defaultConfig(ServerConfiguration configuration) {
-        if (configuration.emailhost.isEmpty() || configuration.emailhost.equalsIgnoreCase("smtp.gmail.com")) {
-            return true;
-        } else if (configuration.emailuser.isEmpty() || configuration.emailuser.equalsIgnoreCase("testuser@gmail.com")) {
+        if (configuration.emailuser.isEmpty() || configuration.emailuser.equalsIgnoreCase("testuser@gmail.com")) {
             return true;
         } else if (configuration.emailpassword.isEmpty() || configuration.emailpassword.equalsIgnoreCase("yourPassword")) {
             return true;

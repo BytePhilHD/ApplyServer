@@ -1,15 +1,18 @@
 package de.bytephil.main;
 
 import de.bytephil.enums.MessageType;
+import de.bytephil.enums.Rank;
 import de.bytephil.services.FileService;
 import de.bytephil.services.LogInService;
 import de.bytephil.services.LogService;
 import de.bytephil.users.Application;
 import de.bytephil.users.ApplicationService;
+import de.bytephil.users.UserService;
 import de.bytephil.utils.*;
 import de.bytephil.utils.Console;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import jline.internal.Log;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -137,7 +140,7 @@ public class Main {
 
                 if (message.contains("LOGIN")) {
                     message = message.replace("LOGIN: ", "");
-                    if (LogInService.login(message)) {
+                    if (LogInService.login(message, ctx.getSessionId())) {
                         ctx.send("CORRECT " + ctx.getSessionId());
                         logtIn.add(ctx.getSessionId());
                         Console.printout("User logged in successfully (Session-ID: " + ctx.getSessionId() + ", IP: " + ctx.session.getRemoteAddress(), MessageType.INFO);
@@ -152,7 +155,6 @@ public class Main {
         app.ws("/login", ws -> {
             ws.onConnect(ctx -> {
                 Console.printout("[/login] Client connected with Session-ID: " + ctx.getSessionId() + " IP: " + ctx.session.getRemoteAddress(), MessageType.DEBUG);
-                //ctx.send("IN*FO" + );
             });
             ws.onClose(ctx -> {
                 Console.printout("[/login] Client disconnected (Session-ID: " + ctx.getSessionId() + ")", MessageType.DEBUG);
@@ -165,9 +167,14 @@ public class Main {
                     if (logtIn.contains(message)) {
                         logtIn.add(ctx.getSessionId());
                         logtIn.remove(message);
+
+                        String username = getUsername(message);
+                        String rank = getRank(username);
+                        ctx.send("IN*FO" + username + "|*|" + rank);
+
                         List<Application> applications = new ApplicationService().applications;
-                        //for (int i = 0; i < applications.size(); i++) {
-                        for (Application application : applications) {
+
+                        for (Application application : applications) {                                                              // TODO Add limit because all applications are sent
                             ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
                         }
                     } else {
@@ -231,6 +238,22 @@ public class Main {
         app.get("/apply", ctx -> {
             ctx.render("/public/apply.html");
         });
+    }
+    public String getUsername(String sessionID) {
+        String username = LogInService.loggedinUsers.get(sessionID);
+
+        try {
+            username = new UserService().getUserByEmail(username).getName();
+        } catch (Exception e1) {}
+        return username;
+    }
+
+    public String getRank(String username) {
+        String rank = new UserService().getUserByName(username).getRank().toString();
+        rank.toLowerCase();
+        rank.substring(0, 1).toUpperCase();
+
+        return rank;
     }
 
     public void checkFolders() {

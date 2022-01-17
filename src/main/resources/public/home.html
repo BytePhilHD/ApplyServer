@@ -231,7 +231,7 @@ Alberto Gonzalez</a></div>
             if (wsinput.includes("CLOSE")) {
                 window.location.href = location.protocol + "login?renew";
             } else if (wsinput.includes("IN*FO")) {
-                wsinput.replace("IN*FO", "");
+                wsinput = wsinput.replace("IN*FO", "");
                 let iend = wsinput.indexOf("|*|");
                 let length = wsinput.length;
                 // The webSocketAnswer should look like this: "BytePhil|*|phitho2018@gmail.com|'|yourpw"
