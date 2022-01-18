@@ -24,9 +24,6 @@ public class ApplicationService {
     }
 
     public void createApplication(Application Application) {
-        if (getApplicationByName(Application.getName()) != null)
-            Console.printout("Application already existsts!", MessageType.ERROR);
-
         if (existsApplication(Application.getId())) {
             Application.setId(PasswordGenerator.generateID(10));
             createApplication(Application);
