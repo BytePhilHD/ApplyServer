@@ -24,8 +24,11 @@ public class WebSocketHandler {
         if (new UserService().getUserByName(user) != null) {
             return false;
         } else {
-            new AccountManager().createAccount(user, email, hashedPW);
-            return true;
+            if (new AccountManager().createAccount(user, email, hashedPW)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
