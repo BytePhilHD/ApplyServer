@@ -13,14 +13,24 @@ public class ConsoleCommands {
         if (command.toLowerCase().equalsIgnoreCase("help")) {
             Console.printout("You typed in help", MessageType.INFO);
         } else if (commandargs[0].toLowerCase().equalsIgnoreCase("user")) {
-            if (commandargs.length == 4) {
+            if (commandargs.length >= 2) {
                 if (commandargs[1].toLowerCase().equalsIgnoreCase("setrank")) {
-                    changeRank(commandargs);
+                    if (commandargs.length == 4) {
+                        changeRank(commandargs);
+                    } else {
+                        Console.printout("Usage: user setrank [name] [rank]", MessageType.WARNING);
+                    }
+                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("getrank")) {
+                    if (commandargs.length == 3) {
+                        getRank(commandargs);
+                    } else {
+                        Console.printout("Usage: user getrank [name]", MessageType.WARNING);
+                    }
                 } else {
-                    Console.printout("Usage: user setrank [name] [rank]", MessageType.WARNING);
+                    Console.printout("Usage: user [setrank/getrank]", MessageType.WARNING);
                 }
             } else {
-                Console.printout("Usage: user setrank [name] [rank]", MessageType.WARNING);
+                Console.printout("Usage: user [setrank/getrank]", MessageType.WARNING);
             }
         } else {
             Console.printout("Unknown command! Type \"help\" for help!", MessageType.INFO);
@@ -39,6 +49,17 @@ public class ConsoleCommands {
             return;
         }
         user.setRank(rank);
-        Console.printout("Changed user " + user.getName() + "'s rank to " + rank, MessageType.INFO);
+        new UserService().saveUser(user);
+        Console.printout("Changed user " + user.getName() + "'s rank to " + user.getRank(), MessageType.INFO);
+    }
+
+    private void getRank(String[] commandargs) {
+        User user = null;
+        try {
+            user = new UserService().getUserByName(commandargs[2]);
+        } catch (Exception e1) {
+            return;
+        }
+        Console.printout("User " + user.getName() + "'s rank is currently " + user.getRank(), MessageType.INFO);
     }
 }
