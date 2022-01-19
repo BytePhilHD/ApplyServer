@@ -8,28 +8,12 @@ import de.bytephil.users.UserService;
 import de.bytephil.utils.WebSocketHandler;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Test {
 
     public static void main(String[] args) {
-        String input = "BytePhil|*|PhilsPW!|'|bytephil@gmail.com";
-
-        int iend = input.indexOf("|*|");
-        int iend1 = input.indexOf("|'|");
-        int length = input.length();
-
-        String username = null;
-        String password = null;
-        String email = null;
-        if (iend != -1) {
-            username = input.substring(0, iend);
-            password = input.substring(iend + 3, iend1);
-            email = input.substring(iend1 + 3, length);
-        }
-
-        System.out.println("Username: " + username + ", PW: " + password + ", Email: " + email);
-
-        // Output: "Username: BytePhil, PW: PhilsPW!, Email: bytephil@gmail.com"
+        System.out.println(Rank.valueOf("User"));
     }
 
     public void testMethod() {

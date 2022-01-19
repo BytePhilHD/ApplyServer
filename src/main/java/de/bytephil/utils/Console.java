@@ -47,13 +47,13 @@ public class Console {
         System.out.println(" ");
     }
 
-    public void reader() {
+    public static void reader() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String input = null;
         try {
             input = reader.readLine();
-            ConsoleCommands.handleCommand(input);
+            new ConsoleCommands().handleCommand(input);
         } catch (IOException e1) {}
     }
 }
