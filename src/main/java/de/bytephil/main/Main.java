@@ -43,7 +43,7 @@ public class Main {
     private static ArrayList<String> logtIn = new ArrayList<>();
 
     public static ServerConfiguration config;
-    public final String version = "0.0.5";
+    public final String version = "0.0.6";
     public boolean debugMSG = false;
     public boolean testing = false;
 
@@ -238,6 +238,9 @@ public class Main {
         app.get("/apply", ctx -> {
             ctx.render("/public/apply.html");
         });
+        while (true) {
+            Console.reader();
+        }
     }
     public String getUsername(String sessionID) {
         String username = LogInService.loggedinUsers.get(sessionID);
