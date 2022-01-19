@@ -1,41 +1,81 @@
 package de.bytephil.services;
 
+import de.bytephil.enums.MessageType;
 import de.bytephil.main.Main;
+import de.bytephil.utils.Console;
 import de.bytephil.utils.ServerConfiguration;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.lang.module.Configuration;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailService {
 
-    public static void send(String to,String sub,String msg){
+    public static void send(String to, String sub, String msg) {
         ServerConfiguration configuration = Main.config;
         //Get properties object
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.host", configuration.emailhost);
+
+        if (defaultConfig(configuration)) {
+            Console.printout("Please update your email credentials in the server.cfg file! Otherwise no email will be sent out!", MessageType.ERROR);
+            return;
+        }
+
+        if (configuration.emailSecureMethod.equalsIgnoreCase("SSL")) {
+            props.put("mail.smtp.socketFactory.port", configuration.emailport);
+            props.put("mail.smtp.socketFactory.class",
+                    "javax.net.ssl.SSLSocketFactory");
+        } else {
+            props.put("mail.smtp.starttls.enable", "true");
+        }
+        props.put("mail.smtp.port", configuration.emailport);
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+
         //get Session
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(configuration.emailuser,configuration.emailpassword);
-                    }
-                });
+        Session session = null;
+        try {
+            session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(configuration.emailuser, configuration.emailpassword);
+                        }
+                    });
+        } catch (Exception e1) {
+            Console.printout("Please check your email credentials! Something went wrong there!", MessageType.ERROR);
+            return;
+        }
         //compose message
         try {
             MimeMessage message = new MimeMessage(session);
-            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            if (configuration.emailDisplayName.isEmpty()) {
+                message.setFrom(new InternetAddress(configuration.emailuser));
+            } else {
+                message.setFrom(new InternetAddress(configuration.emailuser, configuration.emailDisplayName));
+            }
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(sub);
             message.setText(msg);
             //send message
             Transport.send(message);
-        } catch (MessagingException e) {throw new RuntimeException(e);}
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            Console.printout("Please check your email credentials! Something went wrong there!", MessageType.ERROR);
+        }
 
     }
     //  EmailService.send(config.emailuser, config.emailpassword, "phitho2018@gmail.com", "Hallo", "Hallo du");
+
+    private static boolean defaultConfig(ServerConfiguration configuration) {
+        if (configuration.emailuser.equalsIgnoreCase("testuser@gmail.com")) {
+            return true;
+        } else if (configuration.emailpassword.equalsIgnoreCase("yourPassword")) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
