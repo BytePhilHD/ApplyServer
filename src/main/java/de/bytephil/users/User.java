@@ -24,20 +24,7 @@ public class User {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.rank = getRankfromString(rank);
-    }
-
-    public Rank getRankfromString(String rank) {
-        if (rank.equalsIgnoreCase("unverified")) {
-            return Rank.UNVERIFIED;
-        } else if (rank.equalsIgnoreCase("user")) {
-            return Rank.USER;
-        } else if (rank.equalsIgnoreCase("team")) {
-            return Rank.TEAM;
-        } else if (rank.equalsIgnoreCase("admin")) {
-            return Rank.ADMIN;
-        }
-        return null;
+        this.rank = Rank.valueOf(rank.toUpperCase());
     }
 
     public String getName() {

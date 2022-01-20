@@ -35,6 +35,17 @@ public class UserService {
         saveUser(user);
     }
 
+    public void updateUser(User user) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getName().equals(user.getName())) {
+                users.remove(i);
+                users.add(user);
+                return;
+            }
+        }
+        updateAll();
+    }
+
     public void saveUser(User user) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getName().equals(user.getName())) {

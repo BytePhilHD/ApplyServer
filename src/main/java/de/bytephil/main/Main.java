@@ -175,6 +175,7 @@ public class Main {
                         List<Application> applications = new ApplicationService().applications;
 
                         for (Application application : applications) {                                                              // TODO Add limit because all applications are sent
+
                             ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
                         }
                     } else {

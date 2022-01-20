@@ -26,6 +26,14 @@ public class ConsoleCommands {
                     } else {
                         Console.printout("Usage: user getrank [name]", MessageType.WARNING);
                     }
+                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("create")) {
+                    if (commandargs.length == 5) {
+                        String pw = BCrypt.hashpw(commandargs[3], BCrypt.gensalt(12));
+                        new UserService().createUser(new User(commandargs[2], pw, commandargs[4], Rank.USER));
+                        Console.printout("Succesfully added new user " + commandargs[3] + "!", MessageType.INFO);
+                    } else {
+                        Console.printout("Usage: user create [name] [passwort] [email]", MessageType.WARNING);
+                    }
                 } else {
                     Console.printout("Usage: user [setrank/getrank]", MessageType.WARNING);
                 }
@@ -49,7 +57,9 @@ public class ConsoleCommands {
             return;
         }
         user.setRank(rank);
-        new UserService().saveUser(user);
+
+        // TODO Saving of changed rank not working
+
         Console.printout("Changed user " + user.getName() + "'s rank to " + user.getRank(), MessageType.INFO);
     }
 

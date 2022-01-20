@@ -65,8 +65,9 @@
                 document.getElementById("job").value = '';
                 document.getElementById("applicationtext").value = '';
                 ws.send(name + "|*|" + email + "|'|" + job + "|~|" + applicationText);          // "|*|" is placeholder between email and password, so Login.java can detect those
+                window.location.href = location.protocol;
             } else {
-
+                console.log("Empty form");
             }
         }
 
