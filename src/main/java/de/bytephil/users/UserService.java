@@ -99,6 +99,10 @@ public class UserService {
         });
     }
 
+    public List<User> getAll() {
+        return users;
+    }
+
     public JSONObject load(File file) {
         try {
             FileReader reader = new FileReader(file);

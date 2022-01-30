@@ -3,8 +3,12 @@ package de.bytephil.utils;
 import de.bytephil.enums.MessageType;
 import de.bytephil.enums.Rank;
 import de.bytephil.main.Main;
+import de.bytephil.users.Application;
+import de.bytephil.users.ApplicationService;
 import de.bytephil.users.User;
 import de.bytephil.users.UserService;
+
+import java.util.List;
 
 public class ConsoleCommands {
 
@@ -16,6 +20,7 @@ public class ConsoleCommands {
             Console.printout("Create new user     - user create [name] [password] [email]", MessageType.INFO);
             Console.printout("Get rank of user    - user getrank [name]", MessageType.INFO);
             Console.printout("Set rank of user    - user setrank [name] [rank]", MessageType.INFO);
+            Console.printout("List all users      - user list", MessageType.INFO);
 
         } else if (commandargs[0].toLowerCase().equalsIgnoreCase("user")) {
             if (commandargs.length >= 2) {
@@ -37,23 +42,50 @@ public class ConsoleCommands {
                     } else {
                         Console.printout("Usage: user create [name] [password] [email]", MessageType.WARNING);
                     }
+                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("list")) {
+                    listUsers();
                 } else {
-                    Console.printout("Usage: user [setrank/getrank/create]", MessageType.WARNING);
+                    Console.printout("Usage: user [setrank/getrank/create/list]", MessageType.WARNING);
                 }
             } else {
-                Console.printout("Usage: user [setrank/getrank/create]", MessageType.WARNING);
+                Console.printout("Usage: user [setrank/getrank/create/list]", MessageType.WARNING);
+            }
+        } else if (commandargs[0].toLowerCase().equalsIgnoreCase("applies")) {
+            if (commandargs.length >= 2) {
+                if (commandargs[1].toLowerCase().equalsIgnoreCase("list")) {
+                    listApplies();
+                }
+            } else {
+                Console.printout("Usage: applies [list]", MessageType.WARNING);
             }
         } else {
             Console.printout("Unknown command! Type \"help\" for help!", MessageType.INFO);
         }
-
-
     }
 
     private void createUser(String[] commandargs) {
         String pw = BCrypt.hashpw(commandargs[3], BCrypt.gensalt(12));
         new UserService().createUser(new User(commandargs[2], pw, commandargs[4], Rank.USER));
         Console.printout("Succesfully added new user " + commandargs[2] + "!", MessageType.INFO);
+    }
+
+    private void listApplies() {
+        List<Application> applications = new ApplicationService().getApplications();
+        Console.printout("Currently there are " + applications.size() + " applications: ", MessageType.INFO);
+        Console.printout("        Date        |     Job     |     Name     ", MessageType.INFO);
+        for (int i = 0; i < applications.size(); i++) {
+            Application application = applications.get(i);
+            Console.printout(application.getDate() + " | " + application.getJob() + " | " + application.getName(), MessageType.INFO);
+        }
+    }
+
+    private void listUsers() {
+        List<User> users = new UserService().getAll();
+        Console.printout("Currently there are " + users.size() + " users registered: ", MessageType.INFO);
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            Console.printout(user.getRank() + " - " + user.getName(), MessageType.INFO);
+        }
     }
 
     private void changeRank(String[] commandargs) {

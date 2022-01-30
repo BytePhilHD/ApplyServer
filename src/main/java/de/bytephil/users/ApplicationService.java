@@ -66,6 +66,10 @@ public class ApplicationService {
         });
     }
 
+    public List<Application> getApplications() {
+        return applications;
+    }
+
 
     public Application getApplicationByName(String name) {
         return applications.stream().filter(Application -> Application.getName().equals(name)).findFirst().orElse(null);
