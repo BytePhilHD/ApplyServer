@@ -2,6 +2,7 @@ package de.bytephil.utils;
 
 import de.bytephil.enums.MessageType;
 import de.bytephil.enums.Rank;
+import de.bytephil.main.Main;
 import de.bytephil.users.User;
 import de.bytephil.users.UserService;
 
@@ -11,7 +12,11 @@ public class ConsoleCommands {
         String[] commandargs = command.split("\\s+");
 
         if (command.toLowerCase().equalsIgnoreCase("help")) {
-            Console.printout("You typed in help", MessageType.INFO);
+            Console.sendHelp();
+            Console.printout("Create new user     - user create [name] [password] [email]", MessageType.INFO);
+            Console.printout("Get rank of user    - user getrank [name]", MessageType.INFO);
+            Console.printout("Set rank of user    - user setrank [name] [rank]", MessageType.INFO);
+
         } else if (commandargs[0].toLowerCase().equalsIgnoreCase("user")) {
             if (commandargs.length >= 2) {
                 if (commandargs[1].toLowerCase().equalsIgnoreCase("setrank")) {
@@ -28,11 +33,9 @@ public class ConsoleCommands {
                     }
                 } else if (commandargs[1].toLowerCase().equalsIgnoreCase("create")) {
                     if (commandargs.length == 5) {
-                        String pw = BCrypt.hashpw(commandargs[3], BCrypt.gensalt(12));
-                        new UserService().createUser(new User(commandargs[2], pw, commandargs[4], Rank.USER));
-                        Console.printout("Succesfully added new user " + commandargs[3] + "!", MessageType.INFO);
+                        createUser(commandargs);
                     } else {
-                        Console.printout("Usage: user create [name] [passwort] [email]", MessageType.WARNING);
+                        Console.printout("Usage: user create [name] [password] [email]", MessageType.WARNING);
                     }
                 } else {
                     Console.printout("Usage: user [setrank/getrank/create]", MessageType.WARNING);
@@ -45,6 +48,12 @@ public class ConsoleCommands {
         }
 
 
+    }
+
+    private void createUser(String[] commandargs) {
+        String pw = BCrypt.hashpw(commandargs[3], BCrypt.gensalt(12));
+        new UserService().createUser(new User(commandargs[2], pw, commandargs[4], Rank.USER));
+        Console.printout("Succesfully added new user " + commandargs[2] + "!", MessageType.INFO);
     }
 
     private void changeRank(String[] commandargs) {

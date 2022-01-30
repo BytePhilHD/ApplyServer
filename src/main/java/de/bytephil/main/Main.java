@@ -174,8 +174,8 @@ public class Main {
 
                         List<Application> applications = new ApplicationService().applications;
 
-                        for (Application application : applications) {                                                              // TODO Add limit because all applications are sent
 
+                        for (Application application : applications) {                                                              // TODO Add limit because all applications are sent
                             ctx.send(application.getName() + "|*|" + application.getEmail() + "|'|" + application.getJob());
                         }
                     } else {
@@ -243,12 +243,14 @@ public class Main {
             Console.reader();
         }
     }
+
     public String getUsername(String sessionID) {
         String username = LogInService.loggedinUsers.get(sessionID);
 
         try {
             username = new UserService().getUserByEmail(username).getName();
-        } catch (Exception e1) {}
+        } catch (Exception e1) {
+        }
         return username;
     }
 

@@ -26,6 +26,13 @@ public class Console {
         } catch (IOException e1) {
         }
     }
+    public static void sendHelp() {
+        empty();
+        System.out.println("                                ApplyServer HELP");
+        Console.empty();
+        Console.printout("You are running ApplyServer version " + Main.getInstance().version, MessageType.INFO);
+        Console.empty();
+    }
 
     public static void empty() {
         System.out.println("");

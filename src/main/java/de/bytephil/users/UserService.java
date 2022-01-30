@@ -40,9 +40,10 @@ public class UserService {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getName().equals(user.getName())) {
                 users.set(i, user);
-                //return;
+                break;
             }
         }
+        users.add(user);
         updateAll();
     }
 
