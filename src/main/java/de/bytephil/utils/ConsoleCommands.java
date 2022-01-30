@@ -35,10 +35,10 @@ public class ConsoleCommands {
                         Console.printout("Usage: user create [name] [passwort] [email]", MessageType.WARNING);
                     }
                 } else {
-                    Console.printout("Usage: user [setrank/getrank]", MessageType.WARNING);
+                    Console.printout("Usage: user [setrank/getrank/create]", MessageType.WARNING);
                 }
             } else {
-                Console.printout("Usage: user [setrank/getrank]", MessageType.WARNING);
+                Console.printout("Usage: user [setrank/getrank/create]", MessageType.WARNING);
             }
         } else {
             Console.printout("Unknown command! Type \"help\" for help!", MessageType.INFO);
@@ -57,8 +57,7 @@ public class ConsoleCommands {
             return;
         }
         user.setRank(rank);
-
-        // TODO Saving of changed rank not working
+        new UserService().saveUser(user);
 
         Console.printout("Changed user " + user.getName() + "'s rank to " + user.getRank(), MessageType.INFO);
     }
