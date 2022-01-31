@@ -89,7 +89,9 @@ public class Main {
         }
 
         // TEST
-        //
+
+         new Test().testMethod();
+
         // TEST
         startApp();
     }

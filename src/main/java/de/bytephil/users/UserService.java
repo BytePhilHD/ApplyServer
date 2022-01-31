@@ -35,6 +35,21 @@ public class UserService {
         saveUser(user);
     }
 
+    public void removeUser(User user) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getName().equals(user.getName())) {
+                users.remove(i);
+                break;
+            }
+        } try {
+            final File file = new File(new File(path).getPath() + "/" + user.getId() + ".json");
+            file.delete();
+            Console.printout("The user " + user.getName() + " was successfully deleted.", MessageType.INFO);
+        } catch (Exception e1) {
+            Console.printout("The user couldn't be deleted!", MessageType.ERROR);
+        }
+    }
+
 
     public void saveUser(User user) {
         for (int i = 0; i < users.size(); i++) {

@@ -49,7 +49,7 @@ public class WebSocketHandler {
             job = webSocketAnswer.substring(iend1+3, iend2);
             applicationtext = webSocketAnswer.substring(iend2+3, length);
         }
-        if (name == null) {             // TODO Not working. Application is still created although the name, email etc is empty
+        if (name == null || name.equalsIgnoreCase("")) {             // TODO Not working. Application is still created although the name, email etc is empty
             return;
         }
         Application application = new Application(name, email, job, applicationtext);

@@ -36,6 +36,12 @@ public class ConsoleCommands {
                     } else {
                         Console.printout("Usage: user getrank [name]", MessageType.WARNING);
                     }
+                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("delete")) {
+                    if (commandargs.length == 3) {
+                        deleteUser(commandargs[2]);
+                    } else {
+                        Console.printout("Usage: user delete [name]", MessageType.WARNING);
+                    }
                 } else if (commandargs[1].toLowerCase().equalsIgnoreCase("create")) {
                     if (commandargs.length == 5) {
                         createUser(commandargs);
@@ -45,10 +51,10 @@ public class ConsoleCommands {
                 } else if (commandargs[1].toLowerCase().equalsIgnoreCase("list")) {
                     listUsers();
                 } else {
-                    Console.printout("Usage: user [setrank/getrank/create/list]", MessageType.WARNING);
+                    Console.printout("Usage: user [setrank/getrank/delete/create/list]", MessageType.WARNING);
                 }
             } else {
-                Console.printout("Usage: user [setrank/getrank/create/list]", MessageType.WARNING);
+                Console.printout("Usage: user [setrank/getrank/delete/create/list]", MessageType.WARNING);
             }
         } else if (commandargs[0].toLowerCase().equalsIgnoreCase("applies")) {
             if (commandargs.length >= 2) {
@@ -61,6 +67,12 @@ public class ConsoleCommands {
         } else {
             Console.printout("Unknown command! Type \"help\" for help!", MessageType.INFO);
         }
+    }
+
+    private void deleteUser(String commandargs) {
+        User user = new UserService().getUserByName(commandargs);
+        new UserService().removeUser(user);
+
     }
 
     private void createUser(String[] commandargs) {
