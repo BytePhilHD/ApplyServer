@@ -17,10 +17,15 @@ public class ConsoleCommands {
 
         if (command.toLowerCase().equalsIgnoreCase("help")) {
             Console.sendHelp();
-            Console.printout("Create new user     - user create [name] [password] [email]", MessageType.INFO);
-            Console.printout("Get rank of user    - user getrank [name]", MessageType.INFO);
-            Console.printout("Set rank of user    - user setrank [name] [rank]", MessageType.INFO);
-            Console.printout("List all users      - user list", MessageType.INFO);
+            Console.printout("          USER HELP ", MessageType.INFO);
+            Console.printout("Create new user        - user create [name] [password] [email]", MessageType.INFO);
+            Console.printout("Remove user            - user delete [name]", MessageType.INFO);
+            Console.printout("Get rank of user       - user getrank [name]", MessageType.INFO);
+            Console.printout("Set rank of user       - user setrank [name] [rank]", MessageType.INFO);
+            Console.printout("List all users         - user list", MessageType.INFO);
+            Console.empty();
+            Console.printout("          APPLICATION HELP ", MessageType.INFO);
+            Console.printout("List all applications  - applies list", MessageType.INFO);
 
         } else if (commandargs[0].toLowerCase().equalsIgnoreCase("user")) {
             if (commandargs.length >= 2) {
@@ -36,7 +41,7 @@ public class ConsoleCommands {
                     } else {
                         Console.printout("Usage: user getrank [name]", MessageType.WARNING);
                     }
-                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("delete")) {
+                } else if (commandargs[1].toLowerCase().equalsIgnoreCase("delete") || commandargs[1].toLowerCase().equalsIgnoreCase("remove")) {
                     if (commandargs.length == 3) {
                         deleteUser(commandargs[2]);
                     } else {
