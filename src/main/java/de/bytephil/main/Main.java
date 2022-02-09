@@ -257,11 +257,15 @@ public class Main {
     }
 
     public String getRank(String username) {
-        String rank = new UserService().getUserByName(username).getRank().toString();
-        rank.toLowerCase();
-        rank.substring(0, 1).toUpperCase();
+        try {
+            String rank = new UserService().getUserByName(username).getRank().toString();
+            rank.toLowerCase();
+            rank.substring(0, 1).toUpperCase();
 
-        return rank;
+            return rank;
+        } catch (Exception e1) {
+            return null;
+        }
     }
 
     public void checkFolders() {
